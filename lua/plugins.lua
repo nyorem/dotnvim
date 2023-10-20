@@ -9,6 +9,7 @@ Plug 'NeogitOrg/neogit'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-project.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 
 Plug 'sindrets/diffview.nvim'
 Plug 'ibhagwan/fzf-lua'
@@ -26,6 +27,10 @@ vim.keymap.set('n', '<Space>gg', ':Neogit<CR>')
 vim.cmd.colorscheme "catppuccin"
 
 vim.keymap.set('n', '<Space>pp', ':Telescope project<CR>')
+
+vim.keymap.set('n', '<Space>sp',
+  require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true }
+)
 
 if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
