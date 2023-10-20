@@ -18,7 +18,7 @@ sudo cp neovide.desktop /usr/local/share/applications
 ```
 - neogit
 - telescope.nvim
-- multiple cursors (TODO)
+- vim-visual-multi
 
 GUI: neovide
 ```

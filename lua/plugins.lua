@@ -3,20 +3,17 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "~/.config/nvim/bundle")
 
-Plug 'nvim-lua/plenary.nvim'
+Plug 'catppuccin/nvim'
+Plug 'ibhagwan/fzf-lua'
+Plug 'mg979/vim-visual-multi'
 Plug 'NeogitOrg/neogit'
-
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-
-Plug 'sindrets/diffview.nvim'
-Plug 'ibhagwan/fzf-lua'
-
-Plug 'catppuccin/nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'olimorris/persisted.nvim'
-Plug 'mg979/vim-visual-multi'
+Plug 'sindrets/diffview.nvim'
 
 vim.call("plug#end")
 
@@ -25,6 +22,15 @@ local neogit = require("neogit")
 neogit.setup {
 }
 vim.keymap.set('n', '<Space>gg', ':Neogit<CR>')
+
+-- Make fold markers don't break the diff view (see https://github.com/NeogitOrg/neogit/issues/452)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "NeogitStatus" },
+    group = vim.api.nvim_create_augroup("NeogitStatusOptions", {}),
+    callback = function()
+      vim.opt.foldenable = false
+    end,
+})
 
 -- {{{1 NEOVIDE
 if vim.g.neovide then
@@ -62,3 +68,4 @@ vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
 
 vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
+vim.keymap.set('n', '<Space>os', ':Startify<CR>')
