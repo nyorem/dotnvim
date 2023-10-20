@@ -1,8 +1,20 @@
+# How to Install
+
+```shell
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+sudo apt install neovim
+
+python3 -m pip install --user --upgrade pynvim
+
+sudo cp neovide.desktop /usr/local/share/applications
+```
+
 # Plugins
 
 - coc.nvim
 ```
-CocInstall coc-clangd coc-pyright
+:CocInstall coc-clangd coc-pyright
 ```
 - neogit
 - telescope.nvim
@@ -12,10 +24,10 @@ GUI: neovide
 ```
 [Desktop Entry]
 Name=neovide
-Exec=/home/eaton/Téléchargements/neovide.AppImage
+Exec=/path/to/neovide.AppImage
 Terminal=false
 Type=Application
-Icon=/home/eaton/Téléchargements/neovide.png
+Icon=/path/to/neovide.png
 ```
 
 # References

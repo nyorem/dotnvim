@@ -58,5 +58,6 @@ require("persisted").setup {
 
 -- {{{1 STUFF
 vim.cmd.colorscheme "catppuccin"
+vim.o.background = "dark"
 
 vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
