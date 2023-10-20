@@ -16,6 +16,7 @@ Plug 'ibhagwan/fzf-lua'
 
 Plug 'catppuccin/nvim'
 Plug 'olimorris/persisted.nvim'
+Plug 'mg979/vim-visual-multi'
 
 vim.call("plug#end")
 
