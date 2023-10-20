@@ -1,7 +1,7 @@
 -- {{{1 VIM-PLUG
 local Plug = vim.fn["plug#"]
 
-vim.call("plug#begin", "~/.nvim/bundle")
+vim.call("plug#begin", "~/.config/nvim/bundle")
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'NeogitOrg/neogit'
@@ -52,9 +52,11 @@ vim.keymap.set('n', '<Space>sp',
   require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true }
 )
 
--- {{{1 STUFF
-vim.cmd.colorscheme "catppuccin"
-
 -- {{{1 PERSISTED
 require("persisted").setup {
 }
+
+-- {{{1 STUFF
+vim.cmd.colorscheme "catppuccin"
+
+vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
