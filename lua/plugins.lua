@@ -15,23 +15,17 @@ Plug 'sindrets/diffview.nvim'
 Plug 'ibhagwan/fzf-lua'
 
 Plug 'catppuccin/nvim'
+Plug 'olimorris/persisted.nvim'
 
 vim.call("plug#end")
 
 -- {{{1 NEOGIT
 local neogit = require("neogit")
-neogit.setup {}
+neogit.setup {
+}
 vim.keymap.set('n', '<Space>gg', ':Neogit<CR>')
 
--- {{{1 STUFF
-vim.cmd.colorscheme "catppuccin"
-
-vim.keymap.set('n', '<Space>pp', ':Telescope project<CR>')
-
-vim.keymap.set('n', '<Space>sp',
-  require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true }
-)
-
+-- {{{1 NEOVIDE
 if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_cursor_animate_in_insert_mode = false
@@ -44,10 +38,23 @@ if vim.g.neovide then
 end
 
 -- {{{1 TELESCOPE
+require("telescope").load_extension("persisted")
+
 require('telescope').setup {
   extensions = {
     project = {
       order_by = "asc",
     }
   }
+}
+vim.keymap.set('n', '<Space>pp', ':Telescope project<CR>')
+vim.keymap.set('n', '<Space>sp',
+  require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true }
+)
+
+-- {{{1 STUFF
+vim.cmd.colorscheme "catppuccin"
+
+-- {{{1 PERSISTED
+require("persisted").setup {
 }
