@@ -14,8 +14,14 @@ Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'olimorris/persisted.nvim'
 Plug 'sindrets/diffview.nvim'
+Plug 'akinsho/toggleterm.nvim'
 
 vim.call("plug#end")
+
+-- {{{1 catppuccin
+require("catppuccin").setup({
+    term_colors = true,
+})
 
 -- {{{1 NEOGIT
 local neogit = require("neogit")
@@ -63,9 +69,18 @@ vim.keymap.set('n', '<Space>sp',
 require("persisted").setup {
 }
 
+-- {{{1 toggleterm
+require("toggleterm").setup {
+  open_mapping = [[<Space>ot]],
+  direction = 'tab',
+}
+
 -- {{{1 STUFF
 vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
+vim.o.termguicolors = true
 
 vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
 vim.keymap.set('n', '<Space>os', ':Startify<CR>')
+
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
