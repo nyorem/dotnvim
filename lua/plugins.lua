@@ -81,6 +81,8 @@ vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
 vim.o.termguicolors = true
 
+vim.g.lightline = {colorscheme = 'catppuccin'}
+
 vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
 vim.keymap.set('n', '<Space>os', ':Startify<CR>')
 
