@@ -72,6 +72,7 @@ require("persisted").setup {
 -- {{{1 toggleterm
 require("toggleterm").setup {
   open_mapping = [[<Space>ot]],
+  insert_mappings = false,
   direction = 'tab',
 }
 
