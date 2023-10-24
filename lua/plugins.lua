@@ -86,4 +86,4 @@ vim.g.lightline = {colorscheme = 'catppuccin'}
 vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
 vim.keymap.set('n', '<Space>os', ':Startify<CR>')
 
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('t', '<C-o>', '<C-\\><C-n>')
