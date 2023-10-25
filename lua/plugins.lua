@@ -4,6 +4,7 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/bundle")
 
 Plug 'catppuccin/nvim'
+Plug 'f-person/git-blame.nvim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'mg979/vim-visual-multi'
 Plug 'NeogitOrg/neogit'
@@ -76,6 +77,12 @@ require("toggleterm").setup {
   direction = 'tab',
 }
 
+-- {{{1 git-blame
+require('gitblame').setup {
+     enabled = false,
+}
+vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
+
 -- {{{1 STUFF
 vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
@@ -83,7 +90,6 @@ vim.o.termguicolors = true
 
 vim.g.lightline = {colorscheme = 'catppuccin'}
 
-vim.keymap.set('n', '<Space>ot', ':tabedit term://%:p:h//bash<CR>A')
 vim.keymap.set('n', '<Space>os', ':Startify<CR>')
 
 vim.keymap.set('t', '<C-o>', '<C-\\><C-n>')
