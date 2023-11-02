@@ -7,13 +7,15 @@ Plug 'catppuccin/nvim'
 Plug 'f-person/git-blame.nvim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'mg979/vim-visual-multi'
+Plug 'natecraddock/sessions.nvim'
+Plug 'natecraddock/workspaces.nvim'
 Plug 'NeogitOrg/neogit'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-Plug 'nvim-telescope/telescope-project.nvim'
-Plug 'olimorris/persisted.nvim'
+Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+Plug 'rmagatti/auto-session'
 Plug 'sindrets/diffview.nvim'
 Plug 'akinsho/toggleterm.nvim'
 
@@ -51,24 +53,34 @@ if vim.g.neovide then
   vim.keymap.set({'n', 'v'}, '<C-c>', '"+y')
 end
 
--- {{{1 TELESCOPE
-require("telescope").load_extension("persisted")
+-- {{{1 WORKSPACES and SESSIONS
+require("workspaces").setup({
+    sort = true,
+    mru_sort = false,
+    hooks = {
+      open = { "Telescope find_files" },
+    },
+})
 
+vim.keymap.set('n', '<Space>pa', ':WorkspacesAdd<CR>')
+vim.keymap.set('n', '<Space>pd', ':WorkspacesRemove<CR>')
+
+vim.keymap.set('n', '<Space>ps', ':SessionSave<CR>')
+vim.keymap.set('n', '<Space>pr', ':SessionRestore<CR>')
+
+-- {{{1 TELESCOPE
 require('telescope').setup {
   extensions = {
-    project = {
-      order_by = "asc",
-    }
   }
 }
-vim.keymap.set('n', '<Space>pp', ':Telescope project<CR>')
+
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('workspaces')
+
+vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>')
 vim.keymap.set('n', '<Space>sp',
   require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true }
 )
-
--- {{{1 PERSISTED
-require("persisted").setup {
-}
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
@@ -83,13 +95,16 @@ require('gitblame').setup {
 }
 vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
 
--- {{{1 STUFF
+-- {{{1 COLORSCHEME
 vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
 vim.o.termguicolors = true
-
 vim.g.lightline = {colorscheme = 'catppuccin'}
 
+-- {{{1 Other key mappings
 vim.keymap.set('n', '<Space>os', ':Startify<CR>')
 
-vim.keymap.set('t', '<C-o>', '<C-\\><C-n>')
+vim.cmd [[
+  autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
+  autocmd FileType fzf tunmap <Esc><Esc>
+]]
