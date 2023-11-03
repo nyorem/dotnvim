@@ -57,6 +57,7 @@ end
 require("workspaces").setup({
     sort = true,
     mru_sort = false,
+    cd_type = "local",
     hooks = {
       open = { "Telescope find_files" },
     },
