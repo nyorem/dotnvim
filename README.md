@@ -29,7 +29,7 @@ Icon=/path/to/neovide.png
 
 and then
 ```shell
-sudo cp neovide.desktop /usr/local/share/applications
+sudo cp neovide.desktop /usr/share/applications
 ```
 
 # References

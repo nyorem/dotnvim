@@ -66,8 +66,13 @@ require("workspaces").setup({
 vim.keymap.set('n', '<Space>pa', ':WorkspacesAdd<CR>')
 vim.keymap.set('n', '<Space>pd', ':WorkspacesRemove<CR>')
 
-vim.keymap.set('n', '<Space>ps', ':SessionSave<CR>')
-vim.keymap.set('n', '<Space>pr', ':SessionRestore<CR>')
+require("sessions").setup({
+    session_filepath = vim.fn.stdpath("data") .. "/sessions",
+    absolute = true,
+})
+
+vim.keymap.set('n', '<Space>ps', ':SessionsSave<CR>')
+vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>')
 
 -- {{{1 TELESCOPE
 require('telescope').setup {
