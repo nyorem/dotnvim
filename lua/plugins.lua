@@ -15,7 +15,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
-Plug 'rmagatti/auto-session'
 Plug 'sindrets/diffview.nvim'
 Plug 'akinsho/toggleterm.nvim'
 
@@ -92,6 +91,7 @@ vim.keymap.set('n', '<Space>sp',
 require("toggleterm").setup {
   open_mapping = [[<Space>ot]],
   insert_mappings = false,
+  terminal_mappings = false,
   direction = 'tab',
 }
 

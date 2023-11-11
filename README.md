@@ -21,7 +21,7 @@ Create desktop entry for neovide:
 ```
 [Desktop Entry]
 Name=neovide
-Exec=/path/to/neovide.AppImage
+Exec=/path/to/neovide
 Terminal=false
 Type=Application
 Icon=/path/to/neovide.png
@@ -34,5 +34,5 @@ sudo cp neovide.desktop /usr/share/applications
 
 # References
 
-https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
-https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
+- https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+- https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
