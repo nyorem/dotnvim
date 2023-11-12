@@ -3,10 +3,12 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "~/.config/nvim/bundle")
 
+Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'f-person/git-blame.nvim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'mg979/vim-visual-multi'
+Plug 'mfussenegger/nvim-dap'
 Plug 'natecraddock/sessions.nvim'
 Plug 'natecraddock/workspaces.nvim'
 Plug 'NeogitOrg/neogit'
@@ -15,8 +17,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
-Plug 'akinsho/toggleterm.nvim'
 
 vim.call("plug#end")
 
@@ -100,6 +102,61 @@ require('gitblame').setup {
      enabled = false,
 }
 vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
+
+-- {{{1 nvim-dap
+local dap = require('dap')
+local dapui = require("dapui")
+
+dapui.setup()
+
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = vim.env.HOME .. '/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
+}
+
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+  },
+  {
+    name = 'Attach to gdbserver :1234',
+    type = 'cppdbg',
+    request = 'launch',
+    MIMode = 'gdb',
+    miDebuggerServerAddress = 'localhost:1234',
+    miDebuggerPath = '/usr/bin/gdb',
+    cwd = '${workspaceFolder}',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+  },
+}
+
+vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end)
+vim.keymap.set('n', '<Space>de', function()
+  local dap = require('dap')
+  local dapui = require("dapui")
+  dap.terminate()
+  dap.close()
+  dapui.close()
+end)
+vim.keymap.set('n', '<Space>dl', function() require('dap').step_into() end)
+vim.keymap.set('n', '<Space>dh', function() require('dap').step_out() end)
+vim.keymap.set('n', '<Space>dj', function() require('dap').step_over() end)
+vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() end)
+
+-- {{{2 nvim-dap-ui
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
 
 -- {{{1 COLORSCHEME
 vim.cmd.colorscheme "catppuccin"
