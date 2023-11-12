@@ -1,4 +1,4 @@
--- {{{1 VIM-PLUG
+-- {{{1 vim-plug
 local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "~/.config/nvim/bundle")
@@ -28,10 +28,9 @@ require("catppuccin").setup({
     term_colors = true,
 })
 
--- {{{1 NEOGIT
+-- {{{1 neogit
 local neogit = require("neogit")
-neogit.setup {
-}
+neogit.setup {}
 vim.keymap.set('n', '<Space>gg', ':Neogit<CR>')
 
 -- Make fold markers don't break the diff view (see https://github.com/NeogitOrg/neogit/issues/452)
@@ -43,7 +42,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- {{{1 NEOVIDE
+-- {{{1 neovide
 if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_cursor_animate_in_insert_mode = false
@@ -55,7 +54,7 @@ if vim.g.neovide then
   vim.keymap.set({'n', 'v'}, '<C-c>', '"+y')
 end
 
--- {{{1 WORKSPACES and SESSIONS
+-- {{{1 workspaces and sessions
 require("workspaces").setup({
     sort = true,
     mru_sort = false,
@@ -76,7 +75,7 @@ require("sessions").setup({
 vim.keymap.set('n', '<Space>ps', ':SessionsSave<CR>')
 vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>')
 
--- {{{1 TELESCOPE
+-- {{{1 telescope
 require('telescope').setup {
   extensions = {
   }
@@ -92,11 +91,22 @@ vim.keymap.set('n', '<Space>sp',
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
-  open_mapping = [[<Space>ot]],
+  open_mapping = [[<Space>tt]],
   insert_mappings = false,
   terminal_mappings = false,
   direction = 'tab',
 }
+
+-- automatically enter insert mode when opening a terminal
+vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
+    callback = function(args)
+      if vim.startswith(vim.api.nvim_buf_get_name(args.buf), "term://") then
+        vim.cmd("startinsert")
+      end
+    end,
+  })
+
+vim.keymap.set('n', '<Space>tn', ':tab terminal<CR>')
 
 -- {{{1 git-blame
 require('gitblame').setup {
@@ -170,13 +180,13 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
 
--- {{{1 COLORSCHEME
+-- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
 vim.o.termguicolors = true
-vim.g.lightline = {colorscheme = 'catppuccin'}
+vim.g.lightline = { colorscheme = 'catppuccin' }
 
--- {{{1 Other key mappings
+-- {{{1 other stuff
 vim.keymap.set('n', '<Space>os', ':Startify<CR>')
 
 vim.cmd [[
