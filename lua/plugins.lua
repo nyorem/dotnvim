@@ -17,6 +17,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+Plug 'prichrd/netrw.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
 
@@ -102,6 +103,17 @@ require('gitblame').setup {
      enabled = false,
 }
 vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
+
+-- {{1 netrw.nvim
+require("netrw").setup {
+  mappings = {
+    -- Copy absolute path of file under cursor to clipboard
+    ['<Space>y'] = function(payload)
+      local absolute_path = payload.dir .. "/" .. payload.node
+      vim.fn.setreg('+', absolute_path)
+    end,
+  },
+}
 
 -- {{{1 nvim-dap
 local dap = require('dap')
