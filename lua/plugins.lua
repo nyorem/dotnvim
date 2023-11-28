@@ -7,6 +7,7 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'f-person/git-blame.nvim'
 Plug 'ibhagwan/fzf-lua'
+Plug 'ldelossa/nvim-dap-projects'
 Plug 'mg979/vim-visual-multi'
 Plug 'mfussenegger/nvim-dap'
 Plug 'natecraddock/sessions.nvim'
@@ -31,7 +32,7 @@ require("catppuccin").setup({
 -- {{{1 neogit
 local neogit = require("neogit")
 neogit.setup {}
-vim.keymap.set('n', '<Space>gg', ':Neogit<CR>')
+vim.keymap.set('n', '<Space>gg', ':Neogit cwd=%:p:h<CR>')
 
 -- Make fold markers don't break the diff view (see https://github.com/NeogitOrg/neogit/issues/452)
 vim.api.nvim_create_autocmd("FileType", {
@@ -175,6 +176,8 @@ vim.keymap.set('n', '<Space>dh', function() require('dap').step_out() end)
 vim.keymap.set('n', '<Space>dj', function() require('dap').step_over() end)
 vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() end)
 
+require('nvim-dap-projects').search_project_config()
+
 -- {{{2 nvim-dap-ui
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
@@ -191,5 +194,5 @@ vim.keymap.set('n', '<Space>os', ':Startify<CR>')
 
 vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
-  autocmd FileType fzf tunmap <Esc><Esc>
+  autocmd FileType fzf silent! tunmap <Esc><Esc>
 ]]
