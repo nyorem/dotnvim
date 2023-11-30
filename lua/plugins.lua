@@ -96,6 +96,7 @@ require("toggleterm").setup {
   insert_mappings = false,
   terminal_mappings = false,
   direction = 'tab',
+  autochdir = true,
 }
 
 -- automatically enter insert mode when opening a terminal
