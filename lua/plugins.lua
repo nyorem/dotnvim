@@ -78,6 +78,11 @@ vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>')
 
 -- {{{1 telescope
 require('telescope').setup {
+  defaults = {
+    layout_config = {
+      preview_width = 0.5,
+    }
+  },
   extensions = {
   }
 }
@@ -86,9 +91,14 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('workspaces')
 
 vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>')
-vim.keymap.set('n', '<Space>sp',
-  require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true }
-)
+vim.keymap.set('n', '<Space>sp', function()
+  local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
+  if vim.v.shell_error == 0 then
+    require("telescope.builtin").live_grep({ noremap = true, cwd = root })
+  else
+    require("telescope.builtin").live_grep({ noremap = true })
+  end
+end)
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
