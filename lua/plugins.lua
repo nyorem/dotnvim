@@ -6,6 +6,7 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'f-person/git-blame.nvim'
+Plug 'folke/which-key.nvim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'ldelossa/nvim-dap-projects'
 Plug 'mg979/vim-visual-multi'
@@ -193,6 +194,18 @@ require('nvim-dap-projects').search_project_config()
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
+
+-- {{{1 which-key
+vim.o.timeout = true
+vim.o.timeoutlen = 500
+
+require('which-key').setup {
+  key_labels = {
+    ["<Space>"] = "SPC",
+    ["<CR>"] = "RET",
+    ["<tab>"] = "TAB",
+  },
+}
 
 -- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"
