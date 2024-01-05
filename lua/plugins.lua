@@ -13,7 +13,6 @@ Plug 'mg979/vim-visual-multi'
 Plug 'mfussenegger/nvim-dap'
 Plug 'natecraddock/sessions.nvim'
 Plug 'natecraddock/workspaces.nvim'
-Plug 'NeogitOrg/neogit'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -28,20 +27,6 @@ vim.call("plug#end")
 -- {{{1 catppuccin
 require("catppuccin").setup({
     term_colors = true,
-})
-
--- {{{1 neogit
-local neogit = require("neogit")
-neogit.setup {}
-vim.keymap.set('n', '<Space>gg', ':Neogit cwd=%:p:h<CR>')
-
--- Make fold markers don't break the diff view (see https://github.com/NeogitOrg/neogit/issues/452)
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "NeogitStatus" },
-    group = vim.api.nvim_create_augroup("NeogitStatusOptions", {}),
-    callback = function()
-      vim.opt.foldenable = false
-    end,
 })
 
 -- {{{1 neovide
