@@ -39,6 +39,18 @@ if vim.g.neovide then
 
   vim.keymap.set({'i', 'c'}, '<C-v>', '<c-r>+')
   vim.keymap.set({'n', 'v'}, '<C-c>', '"+y')
+
+  -- source: https://neovide.dev/faq.html#how-can-i-dynamically-change-the-scale-at-runtime
+  vim.g.neovide_scale_factor = 1.0
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+  end
+  vim.keymap.set("n", "<C-=>", function()
+    change_scale_factor(1.25)
+  end)
+  vim.keymap.set("n", "<C-+>", function()
+      change_scale_factor(1/1.25)
+    end)
 end
 
 -- {{{1 workspaces and sessions
