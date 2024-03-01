@@ -21,6 +21,7 @@ Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -
 Plug 'prichrd/netrw.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
+Plug 'github/copilot.vim'
 
 vim.call("plug#end")
 
