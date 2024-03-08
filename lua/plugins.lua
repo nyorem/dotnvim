@@ -12,6 +12,7 @@ Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'jghauser/fold-cycle.nvim'
 Plug 'ldelossa/nvim-dap-projects'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mg979/vim-visual-multi'
 Plug 'natecraddock/sessions.nvim'
@@ -132,6 +133,9 @@ require('gitblame').setup {
      enabled = false,
 }
 vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
+
+-- {{{1 gitsigns
+require('gitsigns').setup()
 
 -- {{{1 netrw.nvim
 require("netrw").setup {
