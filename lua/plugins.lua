@@ -5,6 +5,7 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
+Plug 'cdelledonne/vim-cmake'
 Plug 'f-person/git-blame.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
@@ -20,6 +21,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'prichrd/netrw.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
@@ -102,7 +104,8 @@ vim.keymap.set('n', '<Space>sp', function()
 end)
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<Space>ff', builtin.find_files, {})
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<Space>fr', builtin.oldfiles, {})
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
@@ -198,6 +201,11 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
 
+-- {{{1 nvim-tree
+require("nvim-tree").setup()
+
+vim.keymap.set('n', '<Space>n', ':NvimTreeFindFileToggle<CR>')
+
 -- {{{1 which-key
 vim.o.timeout = true
 vim.o.timeoutlen = 500
@@ -219,6 +227,7 @@ require("oil").setup({
     -- change cwd when changing directory from oil
     -- https://github.com/stevearc/oil.nvim/issues/68
     keymaps = {
+      ["<C-p>"] = false,
       ["-"] = function()
         require("oil.actions").parent.callback()
         vim.cmd.lcd(require("oil").get_current_dir())
@@ -247,10 +256,22 @@ vim.keymap.set('n', '<tab>',
 vim.keymap.set('n', '<s-tab>',
   function() return require('fold-cycle').close() end,
   {silent = true, desc = 'Fold-cycle: close folds'})
-vim.keymap.set('n', 'zC',
-  function() return require('fold-cycle').close_all() end,
-  {remap = true, silent = true, desc = 'Fold-cycle: close all folds'})
 
+-- {{{1 vim-cmake
+vim.g.cmake_build_dir_location = "./build"
+vim.g.cmake_default_config = "RelWithDebInfo"
+vim.g.cmake_build_options = { "-j8" }
+vim.g.cmake_link_compile_commands = 1
+
+vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>')
+vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>')
+vim.keymap.set('n', '<F8>', ':CMakeToggle<CR>')
+
+vim.cmd [[
+  augroup vim-cmake-group
+  autocmd User CMakeBuildSucceeded CMakeClose
+  augroup END
+]]
 
 -- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"
