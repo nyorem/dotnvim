@@ -7,10 +7,12 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'f-person/git-blame.nvim'
 Plug 'folke/which-key.nvim'
+Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
+Plug 'jghauser/fold-cycle.nvim'
 Plug 'ldelossa/nvim-dap-projects'
-Plug 'mg979/vim-visual-multi'
 Plug 'mfussenegger/nvim-dap'
+Plug 'mg979/vim-visual-multi'
 Plug 'natecraddock/sessions.nvim'
 Plug 'natecraddock/workspaces.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -21,7 +23,7 @@ Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -
 Plug 'prichrd/netrw.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
-Plug 'github/copilot.vim'
+Plug 'stevearc/oil.nvim'
 
 vim.call("plug#end")
 
@@ -99,6 +101,9 @@ vim.keymap.set('n', '<Space>sp', function()
   end
 end)
 
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<Space>ff', builtin.find_files, {})
+
 -- {{{1 toggleterm
 require("toggleterm").setup {
   open_mapping = [[<Space>tt]],
@@ -125,7 +130,7 @@ require('gitblame').setup {
 }
 vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
 
--- {{1 netrw.nvim
+-- {{{1 netrw.nvim
 require("netrw").setup {
   mappings = {
     -- Copy absolute path of file under cursor to clipboard
@@ -205,6 +210,48 @@ require('which-key').setup {
   },
 }
 
+-- {{{1 oil.nvim
+require("oil").setup({
+    view_options = {
+      show_hidden = true,
+    },
+    skip_confirm_for_simple_edits = true,
+    -- change cwd when changing directory from oil
+    -- https://github.com/stevearc/oil.nvim/issues/68
+    keymaps = {
+      ["-"] = function()
+        require("oil.actions").parent.callback()
+        vim.cmd.lcd(require("oil").get_current_dir())
+      end,
+      ["<CR>"] = function()
+        require("oil").select(nil, function(err)
+          if not err then
+            local curdir = require("oil").get_current_dir()
+            if curdir then
+              vim.cmd.lcd(curdir)
+            end
+          end
+        end)
+      end,
+    },
+})
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- {{{1 fold-cycle.nvim
+require('fold-cycle').setup()
+
+vim.keymap.set('n', '<tab>',
+  function() return require('fold-cycle').open() end,
+  {silent = true, desc = 'Fold-cycle: open folds'})
+vim.keymap.set('n', '<s-tab>',
+  function() return require('fold-cycle').close() end,
+  {silent = true, desc = 'Fold-cycle: close folds'})
+vim.keymap.set('n', 'zC',
+  function() return require('fold-cycle').close_all() end,
+  {remap = true, silent = true, desc = 'Fold-cycle: close all folds'})
+
+
 -- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"
 vim.o.background = "dark"
@@ -218,3 +265,11 @@ vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
   autocmd FileType fzf silent! tunmap <Esc><Esc>
 ]]
+
+-- fix issue when launching neovim inside a python virtual environment
+-- https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
+if vim.fn.exists("$VIRTUAL_ENV") == 1 then
+    vim.g.python3_host_prog = vim.fn.substitute(vim.fn.system("which -a python3 | head -n2 | tail -n1"), "\n", "", "g")
+else
+    vim.g.python3_host_prog = vim.fn.substitute(vim.fn.system("which python3"), "\n", "", "g")
+end
