@@ -24,6 +24,7 @@ Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'prichrd/netrw.nvim'
+Plug 'pwntester/octo.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
 Plug 'stevearc/oil.nvim'
@@ -276,6 +277,16 @@ vim.cmd [[
   autocmd User CMakeBuildSucceeded CMakeClose
   augroup END
 ]]
+
+-- {{{1 octo.nvim
+require("octo").setup({
+    enable_builtin = true,
+    suppress_missing_scope = {
+      projects_v2 = true,
+    },
+})
+
+vim.keymap.set('n', '<Space>O', '<CMD>Octo<CR>')
 
 -- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"
