@@ -6,7 +6,6 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'cdelledonne/vim-cmake'
-Plug 'f-person/git-blame.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
@@ -129,14 +128,13 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
 
 vim.keymap.set('n', '<Space>tn', ':tab terminal<CR>')
 
--- {{{1 git-blame
-require('gitblame').setup {
-     enabled = false,
-}
-vim.keymap.set('n', '<Space>gb', ':GitBlameToggle<CR>')
-
 -- {{{1 gitsigns
-require('gitsigns').setup()
+require('gitsigns').setup {
+  current_line_blame_opts = {
+    delay = 0,
+  }
+}
+vim.keymap.set('n', '<Space>gb', ':Gitsigns toggle_current_line_blame<CR>')
 
 -- {{{1 netrw.nvim
 require("netrw").setup {
@@ -186,6 +184,8 @@ dap.configurations.cpp = {
   },
 }
 
+dap.configurations.c = dap.configurations.cpp
+
 vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end)
 vim.keymap.set('n', '<Space>de', function()
   local dap = require('dap')
@@ -202,8 +202,17 @@ vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() e
 require('nvim-dap-projects').search_project_config()
 
 -- {{{2 nvim-dap-ui
-dap.listeners.after.event_initialized["dapui_config"] = function()
+dap.listeners.before.attach.dapui_config = function()
   dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
 end
 
 -- {{{1 nvim-tree
