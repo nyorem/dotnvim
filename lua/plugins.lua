@@ -42,6 +42,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animate_command_line = false
 
   vim.g.coc_node_path = vim.env.HOME .."/.nvm/versions/node/v18.14.1/bin/node"
+  vim.g.copilot_node_command = vim.env.HOME .."/.nvm/versions/node/v18.14.1/bin/node"
 
   vim.keymap.set({'i', 'c'}, '<C-v>', '<c-r>+')
   vim.keymap.set({'n', 'v'}, '<C-c>', '"+y')
@@ -156,7 +157,7 @@ dapui.setup()
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
-  command = vim.env.HOME .. '/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
+  command = vim.env.HOME .. '/dev/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
 }
 
 dap.configurations.cpp = {
@@ -236,6 +237,9 @@ require('which-key').setup {
 require("oil").setup({
     view_options = {
       show_hidden = true,
+      is_always_hidden = function(name, bufnr)
+        return name == "." or name == ".."
+      end,
     },
     skip_confirm_for_simple_edits = true,
     -- change cwd when changing directory from oil
@@ -275,6 +279,18 @@ vim.keymap.set('n', '<s-tab>',
 vim.g.cmake_build_dir_location = "./build"
 vim.g.cmake_default_config = "RelWithDebInfo"
 vim.g.cmake_build_options = { "-j8" }
+vim.g.cmake_generate_options = {
+  "-DENABLE_STANDALONE=TRUE",
+  "-DENABLE_CDS=FALSE",
+  "-DENABLE_TEST=TRUE",
+  "-DENABLE_RUN_TESTS_AFTER_BUILD=FALSE",
+  "-DENABLE_SRR=TRUE",
+  "-DENABLE_DM=TRUE",
+  "-DREST_API_VERSION=2",
+  "-DENABLE_GTEST_DISCOVER=TRUE",
+  "-DENABLE_EVCI=TRUE",
+  "-DENABLE_OCPP16=TRUE",
+}
 vim.g.cmake_link_compile_commands = 1
 
 vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>')
@@ -292,6 +308,9 @@ require("octo").setup({
     enable_builtin = true,
     suppress_missing_scope = {
       projects_v2 = true,
+    },
+    file_panel = {
+      use_icons = false,
     },
 })
 
