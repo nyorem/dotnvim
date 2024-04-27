@@ -7,6 +7,7 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'cdelledonne/vim-cmake'
 Plug 'folke/which-key.nvim'
+Plug 'gabrielpoca/replacer.nvim'
 Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'jghauser/fold-cycle.nvim'
@@ -273,6 +274,9 @@ vim.keymap.set('n', '<tab>',
 vim.keymap.set('n', '<s-tab>',
   function() return require('fold-cycle').close() end,
   {silent = true, desc = 'Fold-cycle: close folds'})
+
+-- {{{1 replacer.nvim
+vim.api.nvim_set_keymap('n', '<leader>h', ':lua require("replacer").run()<cr>', { silent = true })
 
 -- {{{1 vim-cmake
 vim.g.cmake_build_dir_location = "./build"
