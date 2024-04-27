@@ -13,7 +13,6 @@ Plug 'jghauser/fold-cycle.nvim'
 Plug 'ldelossa/nvim-dap-projects'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
-Plug 'mg979/vim-visual-multi'
 Plug 'natecraddock/sessions.nvim'
 Plug 'natecraddock/workspaces.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -106,7 +105,7 @@ vim.keymap.set('n', '<Space>sp', function()
 end)
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<Space>fr', builtin.oldfiles, {})
 
 -- {{{1 toggleterm
