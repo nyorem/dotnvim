@@ -265,6 +265,15 @@ require("oil").setup({
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+-- https://github.com/stevearc/oil.nvim/issues/114#issuecomment-1571332722
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil_preview",
+  callback = function(params)
+    vim.keymap.set("n", "<CR>", "o", { buffer = params.buf, remap = true, nowait = true })
+    vim.keymap.set("n", "<ESC>", "c", { buffer = params.buf, remap = true, nowait = true })
+  end,
+})
+
 -- {{{1 fold-cycle.nvim
 require('fold-cycle').setup()
 
