@@ -106,6 +106,9 @@ vim.keymap.set('n', '<Space>sp', function()
 end)
 
 local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<Space>h', builtin.help_tags, {})
+vim.keymap.set('n', '<Space>,', builtin.buffers, {})
+vim.keymap.set('n', '<Space><Space>', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<Space>fr', builtin.oldfiles, {})
 
