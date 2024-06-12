@@ -15,7 +15,9 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'natecraddock/sessions.nvim'
 Plug 'natecraddock/workspaces.nvim'
+Plug 'NeogitOrg/neogit'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
@@ -58,6 +60,14 @@ if vim.g.neovide then
       change_scale_factor(1/1.25)
     end)
 end
+
+-- {{{1 neogit
+local neogit = require("neogit")
+neogit.setup {}
+vim.keymap.set('n', '<Space>gg', function()
+  local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
+  require("neogit").open({ cwd = cwd_without_oil })
+end)
 
 -- {{{1 workspaces and sessions
 require("workspaces").setup({
