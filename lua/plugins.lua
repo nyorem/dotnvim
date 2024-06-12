@@ -10,7 +10,6 @@ Plug 'folke/which-key.nvim'
 Plug 'gabrielpoca/replacer.nvim'
 Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
-Plug 'jghauser/fold-cycle.nvim'
 Plug 'ldelossa/nvim-dap-projects'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
@@ -276,16 +275,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<ESC>", "c", { buffer = params.buf, remap = true, nowait = true })
   end,
 })
-
--- {{{1 fold-cycle.nvim
-require('fold-cycle').setup()
-
-vim.keymap.set('n', '<tab>',
-  function() return require('fold-cycle').open() end,
-  {silent = true, desc = 'Fold-cycle: open folds'})
-vim.keymap.set('n', '<s-tab>',
-  function() return require('fold-cycle').close() end,
-  {silent = true, desc = 'Fold-cycle: close folds'})
 
 -- {{{1 replacer.nvim
 vim.api.nvim_set_keymap('n', '<leader>h', ':lua require("replacer").run()<cr>', { silent = true })
