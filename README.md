@@ -36,3 +36,5 @@ sudo cp neovide.desktop /usr/share/applications
 
 - https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 - https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
+
+TODO
