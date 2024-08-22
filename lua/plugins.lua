@@ -63,11 +63,13 @@ end
 
 -- {{{1 neogit
 local neogit = require("neogit")
-neogit.setup {}
-vim.keymap.set('n', '<Space>gg', function()
-  local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
-  require("neogit").open({ cwd = cwd_without_oil })
-end)
+neogit.setup {
+  disable_insert_on_commit = true,
+}
+-- vim.keymap.set('n', '<Space>gg', function()
+--   local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
+--   require("neogit").open({ cwd = cwd_without_oil })
+-- end)
 
 -- {{{1 workspaces and sessions
 require("workspaces").setup({
@@ -120,6 +122,8 @@ vim.keymap.set('n', '<Space>,', builtin.buffers, {})
 vim.keymap.set('n', '<Space><Space>', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<Space>fr', builtin.oldfiles, {})
+vim.keymap.set('n', '<Space>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true })
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
@@ -147,7 +151,17 @@ require('gitsigns').setup {
     delay = 0,
   }
 }
-vim.keymap.set('n', '<Space>gb', ':Gitsigns toggle_current_line_blame<CR>')
+vim.keymap.set('n', '<Space>gB', ':Gitsigns toggle_current_line_blame<CR>')
+
+-- {{{1 diffview.nvim
+require("diffview").setup {
+  use_icons = false,
+  keymaps = {
+    file_panel = {
+      { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close diffview" } },
+    }
+  }
+}
 
 -- {{{1 netrw.nvim
 require("netrw").setup {
@@ -238,10 +252,12 @@ vim.o.timeout = true
 vim.o.timeoutlen = 500
 
 require('which-key').setup {
-  key_labels = {
-    ["<Space>"] = "SPC",
-    ["<CR>"] = "RET",
-    ["<tab>"] = "TAB",
+  replace = {
+    key = {
+      { "<Space>", "SPC" },
+      { "<CR>", "RET" },
+      { "<tab>", "TAB" },
+    },
   },
 }
 
@@ -328,7 +344,11 @@ require("octo").setup({
     },
 })
 
-vim.keymap.set('n', '<Space>O', '<CMD>Octo<CR>')
+vim.keymap.set('n', '<Space>go', '<CMD>Octo<CR>')
+vim.keymap.set('n', '<Space>gpc', ':Octo search is:pr archived:false author:@me is:open<CR>') -- created
+vim.keymap.set('n', '<Space>gpa', ':Octo search is:pr archived:false assignee:@me is:open<CR>') -- assigned
+vim.keymap.set('n', '<Space>gpm', ':Octo search is:pr archived:false mentions:@me is:open<CR>') -- mentioned
+vim.keymap.set('n', '<Space>gpr', ':Octo search is:pr archived:false review-requested:@me is:open<CR>') -- review requests
 
 -- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"

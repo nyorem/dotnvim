@@ -1,3 +1,4 @@
 {
   "inlayHint.enable": false,
+  "clangd.arguments": ["-j=1", "--background-index", "--malloc-trim"]
 }
