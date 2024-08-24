@@ -5,7 +5,7 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
-Plug 'cdelledonne/vim-cmake'
+Plug 'Civitasv/cmake-tools.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'gabrielpoca/replacer.nvim'
 Plug 'github/copilot.vim'
@@ -305,33 +305,43 @@ vim.api.nvim_create_autocmd("FileType", {
 -- {{{1 replacer.nvim
 vim.api.nvim_set_keymap('n', '<leader>h', ':lua require("replacer").run()<cr>', { silent = true })
 
--- {{{1 vim-cmake
-vim.g.cmake_build_dir_location = "./build"
-vim.g.cmake_default_config = "RelWithDebInfo"
-vim.g.cmake_build_options = { "-j8" }
-vim.g.cmake_generate_options = {
-  "-DENABLE_STANDALONE=TRUE",
-  "-DENABLE_CDS=FALSE",
-  "-DENABLE_TEST=TRUE",
-  "-DENABLE_RUN_TESTS_AFTER_BUILD=FALSE",
-  "-DENABLE_SRR=TRUE",
-  "-DENABLE_DM=TRUE",
-  "-DREST_API_VERSION=2",
-  "-DENABLE_GTEST_DISCOVER=TRUE",
-  "-DENABLE_EVCI=TRUE",
-  "-DENABLE_OCPP16=TRUE",
+-- {{{1 cmake-tools.nvim
+require("cmake-tools").setup{
+    cmake_generate_options = {
+      "-DENABLE_STANDALONE=TRUE",
+      "-DENABLE_CDS=FALSE",
+      "-DENABLE_TEST=TRUE",
+      "-DENABLE_RUN_TESTS_AFTER_BUILD=FALSE",
+      "-DENABLE_SRR=TRUE",
+      "-DENABLE_DM=TRUE",
+      "-DREST_API_VERSION=2",
+      "-DENABLE_GTEST_DISCOVER=TRUE",
+      "-DENABLE_EVCI=TRUE",
+      "-DENABLE_OCPP16=TRUE",
+    },
+    cmake_build_options = { "-j8" },
+    cmake_build_directory = "./build",
+    cmake_executor = {
+      name = "quickfix",
+      default_opts = {
+        quickfix = {
+          size = 20,
+          auto_close_when_success = false,
+        },
+        toggleterm = {
+          direction = "horizontal",
+          auto_scroll = true,
+        },
+        terminal = {
+          split_size = 20,
+        },
+      },
+    },
 }
-vim.g.cmake_link_compile_commands = 1
 
 vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>')
 vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>')
-vim.keymap.set('n', '<F8>', ':CMakeToggle<CR>')
-
-vim.cmd [[
-  augroup vim-cmake-group
-  autocmd User CMakeBuildSucceeded CMakeClose
-  augroup END
-]]
+vim.keymap.set('n', '<F8>', ':CMakeCloseExecutor<CR>')
 
 -- {{{1 octo.nvim
 require("octo").setup({
