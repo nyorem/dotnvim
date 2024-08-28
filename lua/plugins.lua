@@ -7,7 +7,6 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'Civitasv/cmake-tools.nvim'
 Plug 'folke/which-key.nvim'
-Plug 'gabrielpoca/replacer.nvim'
 Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'kevinhwang91/nvim-bqf'
@@ -305,8 +304,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- {{{1 replacer.nvim
-vim.api.nvim_set_keymap('n', '<leader>h', ':lua require("replacer").run()<cr>', { silent = true })
 
 -- {{{1 cmake-tools.nvim
 require("cmake-tools").setup{
