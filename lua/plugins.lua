@@ -107,6 +107,7 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('workspaces')
 
 vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>')
+vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<Space>sp', function()
   local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
   if vim.v.shell_error == 0 then
