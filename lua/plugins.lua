@@ -81,17 +81,17 @@ require("workspaces").setup({
 })
 
 require('telescope').load_extension('workspaces')
-vim.keymap.set('n', '<Space>pa', ':WorkspacesAdd<CR>')
-vim.keymap.set('n', '<Space>pd', ':WorkspacesRemove<CR>')
-vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>')
+vim.keymap.set('n', '<Space>pa', ':WorkspacesAdd<CR>', { desc = "Add current directory to workspace list" })
+vim.keymap.set('n', '<Space>pd', ':WorkspacesRemove<CR>', { desc = "Remove current directory from the workspace list" })
+vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>', { desc = "List all workspaces" })
 
 require("sessions").setup({
     session_filepath = vim.fn.stdpath("data") .. "/sessions",
     absolute = true,
 })
 
-vim.keymap.set('n', '<Space>ps', ':SessionsSave<CR>')
-vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>')
+vim.keymap.set('n', '<Space>ps', ':SessionsSave<CR>', { desc = "Save current session" })
+vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>', { desc = "Restore last session" })
 
 -- {{{1 telescope
 require('telescope').setup {
@@ -106,7 +106,7 @@ require('telescope').setup {
 
 require('telescope').load_extension('fzf')
 
-vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>')
+vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>', { desc = "Grep inside current directory" })
 vim.keymap.set('n', '<Space>sp', function()
   local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
   if vim.v.shell_error == 0 then
@@ -114,17 +114,17 @@ vim.keymap.set('n', '<Space>sp', function()
   else
     require("telescope.builtin").live_grep({ noremap = true })
   end
-end)
+end, { desc = "Grep inside whole git repository" })
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<Space>h', builtin.help_tags, {})
-vim.keymap.set('n', '<Space>,', builtin.buffers, {})
-vim.keymap.set('n', '<Space><Space>', builtin.find_files, {})
+vim.keymap.set('n', '<Space>h', builtin.help_tags, { desc = "Search inside vim help" })
+vim.keymap.set('n', '<Space>,', builtin.buffers, { desc = "List open buffers" })
+vim.keymap.set('n', '<Space><Space>', builtin.find_files, { desc = "Find a file" })
 vim.keymap.set('n', '<C-p>', function()
   if not pcall(builtin.git_files) then builtin.find_files() end
-end, {})
-vim.keymap.set('n', '<Space>fr', builtin.oldfiles, {})
-vim.keymap.set('n', '<Space>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true })
+end, { desc = "Find a file in git repository" })
+vim.keymap.set('n', '<Space>fr', builtin.oldfiles, { desc = "List all recent files" })
+vim.keymap.set('n', '<Space>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true, desc = "List all git branches" })
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
@@ -138,7 +138,7 @@ require("toggleterm").setup {
   shade_terminals = false,
   -- autochdir = true,
 }
-vim.keymap.set('n', '<Space>tt', ":ToggleTerm direction=vertical<CR>")
+vim.keymap.set('n', '<Space>tt', ":ToggleTerm direction=vertical<CR>", { desc = "Open a terminal on the side" })
 
 -- automatically enter insert mode when opening a terminal
 vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
@@ -149,7 +149,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
     end,
   })
 
-vim.keymap.set('n', '<Space>tn', ':tab terminal<CR>')
+vim.keymap.set('n', '<Space>tn', ':tab terminal<CR>', { desc = "Open a terminal in a new tab" })
 
 -- {{{1 gitsigns
 require('gitsigns').setup {
@@ -164,7 +164,7 @@ require('gitsigns').setup {
     delay = 0,
   }
 }
-vim.keymap.set('n', '<Space>gB', ':Gitsigns toggle_current_line_blame<CR>')
+vim.keymap.set('n', '<Space>gB', ':Gitsigns toggle_current_line_blame<CR>', { desc = "Toggle git blame" })
 
 -- {{{1 diffview.nvim
 require("diffview").setup {
@@ -175,7 +175,7 @@ require("diffview").setup {
     }
   }
 }
-vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Open diffview" })
 
 -- {{{1 nvim-dap
 local dap = require('dap')
@@ -216,18 +216,18 @@ dap.configurations.cpp = {
 
 dap.configurations.c = dap.configurations.cpp
 
-vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end)
+vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end, { desc = "Start/Resume debugging session" })
 vim.keymap.set('n', '<Space>de', function()
   local dap = require('dap')
   local dapui = require("dapui")
   dap.terminate()
   dap.close()
   dapui.close()
-end)
-vim.keymap.set('n', '<Space>dl', function() require('dap').step_into() end)
-vim.keymap.set('n', '<Space>dh', function() require('dap').step_out() end)
-vim.keymap.set('n', '<Space>dj', function() require('dap').step_over() end)
-vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() end)
+end, { desc = "Stop debugging session" })
+vim.keymap.set('n', '<Space>dl', function() require('dap').step_into() end, { desc = "Step into" })
+vim.keymap.set('n', '<Space>dh', function() require('dap').step_out() end, { desc = "Step out" })
+vim.keymap.set('n', '<Space>dj', function() require('dap').step_over() end, { desc = "Step over" })
+vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() end, { desc = "Toggle breakpoint" })
 
 require('nvim-dap-projects').search_project_config()
 
@@ -248,7 +248,7 @@ end
 -- {{{1 nvim-tree
 require("nvim-tree").setup()
 
-vim.keymap.set('n', '<Space>n', ':NvimTreeFindFileToggle<CR>')
+vim.keymap.set('n', '<Space>n', ':NvimTreeFindFileToggle<CR>', { desc = "Toggle file tree" })
 
 -- {{{1 which-key
 vim.o.timeout = true
@@ -262,7 +262,35 @@ require('which-key').setup {
       { "<tab>", "TAB" },
     },
   },
+  icons = {
+    mappings = false,
+  },
 }
+
+local wk = require('which-key')
+
+wk.add({
+  { "gc", group = "Comment" },
+  { "<Space>c", group = "LSP" },
+  { "<Space>ca", desc = "Run code action" },
+  { "<Space>cd", desc = "Go to definition" },
+  { "<Space>cf", desc = "Format selected code" },
+  { "<Space>cr", desc = "Find all references" },
+  { "<Space>d", group = "Debugging" },
+  { "<Space>dc", desc = "Continue debugging session" },
+  { "<Space>dk", desc = "Restart Vimspector" },
+  { "<Space>dt", desc = "Toggle breakpoint" },
+  { "<Space>dT", desc = "Clear all breakpoints" },
+  { "<Space>f", group = "Files" },
+  { "<Space>g", group = "Git" },
+  { "<Space>gl", desc = "Git log" },
+  { "<Space>gg", desc = "Git status" },
+  { "<Space>gp", group = "Github" },
+  { "<Space>p", group = "Projects" },
+  { "<Space>s", group = "Search" },
+  { "<Space>t", group = "Terminal" },
+  { "<Space>v", group = "Vim" },
+})
 
 -- {{{1 oil.nvim
 require("oil").setup({
@@ -342,9 +370,9 @@ require("cmake-tools").setup{
     },
 }
 
-vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>')
-vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>')
-vim.keymap.set('n', '<F8>', ':CMakeCloseExecutor<CR>')
+vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>', { desc = "Configure CMake project" })
+vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>', { desc = "Build CMake project" })
+vim.keymap.set('n', '<F8>', ':CMakeCloseExecutor<CR>', { desc = "Close CMake executor" })
 
 -- {{{1 octo.nvim
 require("octo").setup({
@@ -357,11 +385,11 @@ require("octo").setup({
     },
 })
 
-vim.keymap.set('n', '<Space>go', '<CMD>Octo<CR>')
-vim.keymap.set('n', '<Space>gpc', ':Octo search is:pr archived:false author:@me is:open<CR>') -- created
-vim.keymap.set('n', '<Space>gpa', ':Octo search is:pr archived:false assignee:@me is:open<CR>') -- assigned
-vim.keymap.set('n', '<Space>gpm', ':Octo search is:pr archived:false mentions:@me is:open<CR>') -- mentioned
-vim.keymap.set('n', '<Space>gpr', ':Octo search is:pr archived:false review-requested:@me is:open<CR>') -- review requests
+vim.keymap.set('n', '<Space>go', '<CMD>Octo<CR>', { desc = "Open Octo dashboard" })
+vim.keymap.set('n', '<Space>gpc', ':Octo search is:pr archived:false author:@me is:open<CR>', { desc = "List all the PRs I created" })
+vim.keymap.set('n', '<Space>gpa', ':Octo search is:pr archived:false assignee:@me is:open<CR>', { desc = "List all the PRs assigned to me" })
+vim.keymap.set('n', '<Space>gpm', ':Octo search is:pr archived:false mentions:@me is:open<CR>', { desc = "List all the PRs where I am mentioned" })
+vim.keymap.set('n', '<Space>gpr', ':Octo search is:pr archived:false review-requested:@me is:open<CR>', { desc = "List all the PRs where I am requested to review" })
 
 -- {{{1 colorscheme
 vim.cmd.colorscheme "catppuccin"
@@ -370,7 +398,7 @@ vim.o.termguicolors = true
 vim.g.lightline = { colorscheme = 'catppuccin' }
 
 -- {{{1 other stuff
-vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>')
+vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configurtion" })
 
 vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
