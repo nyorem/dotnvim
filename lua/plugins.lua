@@ -23,7 +23,6 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
 Plug 'nvim-tree/nvim-tree.lua'
-Plug 'prichrd/netrw.nvim'
 Plug 'pwntester/octo.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
@@ -81,8 +80,10 @@ require("workspaces").setup({
     },
 })
 
+require('telescope').load_extension('workspaces')
 vim.keymap.set('n', '<Space>pa', ':WorkspacesAdd<CR>')
 vim.keymap.set('n', '<Space>pd', ':WorkspacesRemove<CR>')
+vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>')
 
 require("sessions").setup({
     session_filepath = vim.fn.stdpath("data") .. "/sessions",
@@ -104,9 +105,7 @@ require('telescope').setup {
 }
 
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('workspaces')
 
-vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>')
 vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<Space>sp', function()
   local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
@@ -126,16 +125,20 @@ vim.keymap.set('n', '<C-p>', function()
 end, {})
 vim.keymap.set('n', '<Space>fr', builtin.oldfiles, {})
 vim.keymap.set('n', '<Space>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true })
-vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true })
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
-  open_mapping = [[<Space>tt]],
-  insert_mappings = false,
-  terminal_mappings = false,
-  direction = 'tab',
-  autochdir = true,
+  size = function(term)
+    if term.direction == "vertical" then
+      return 0.5 * vim.o.columns
+    else
+      return 15
+    end
+  end,
+  shade_terminals = false,
+  -- autochdir = true,
 }
+vim.keymap.set('n', '<Space>tt', ":ToggleTerm direction=vertical<CR>")
 
 -- automatically enter insert mode when opening a terminal
 vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
@@ -172,17 +175,7 @@ require("diffview").setup {
     }
   }
 }
-
--- {{{1 netrw.nvim
-require("netrw").setup {
-  mappings = {
-    -- Copy absolute path of file under cursor to clipboard
-    ['<Space>y'] = function(payload)
-      local absolute_path = payload.dir .. "/" .. payload.node
-      vim.fn.setreg('+', absolute_path)
-    end,
-  },
-}
+vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true })
 
 -- {{{1 nvim-dap
 local dap = require('dap')
@@ -301,8 +294,10 @@ require("oil").setup({
     },
 })
 
+-- vim-vinegar like mapping to go up a directory
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+-- use <CR> to confirm and <ESC> to quit in a prompt
 -- https://github.com/stevearc/oil.nvim/issues/114#issuecomment-1571332722
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "oil_preview",
@@ -375,7 +370,7 @@ vim.o.termguicolors = true
 vim.g.lightline = { colorscheme = 'catppuccin' }
 
 -- {{{1 other stuff
-vim.keymap.set('n', '<Space>os', ':Startify<CR>')
+vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>')
 
 vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
