@@ -319,6 +319,16 @@ require("oil").setup({
           end
         end)
       end,
+      ["<Space>y"] = function()
+        -- source: https://github.com/stevearc/oil.nvim/blob/fb8b101d7cb4727d8719ab6ed141330eca997d3f/lua/oil/actions.lua#L194
+        local oil = require("oil")
+        local entry = oil.get_cursor_entry()
+        local dir = oil.get_current_dir()
+        if not entry or not dir then
+          return
+        end
+        vim.fn.setreg("+", dir .. entry.name)
+      end,
     },
 })
 
