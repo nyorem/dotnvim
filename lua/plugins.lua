@@ -9,8 +9,10 @@ Plug 'Civitasv/cmake-tools.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
+Plug 'jonarrien/telescope-cmdline.nvim'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'ldelossa/nvim-dap-projects'
+Plug 'kylechui/nvim-surround'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'natecraddock/sessions.nvim'
@@ -101,10 +103,21 @@ require('telescope').setup {
     }
   },
   extensions = {
+    cmdline = {
+      picker = {
+        layout_config = {
+          width  = 130,
+          height = 40,
+        }
+      },
+    },
   }
 }
 
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('cmdline')
+
+vim.api.nvim_set_keymap('n', ':', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
 
 vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>', { desc = "Grep inside current directory" })
 vim.keymap.set('n', '<Space>sp', function()
@@ -286,11 +299,22 @@ wk.add({
   { "<Space>gl", desc = "Git log" },
   { "<Space>gg", desc = "Git status" },
   { "<Space>gp", group = "Github" },
+  { "<Space>jp", group = "Pretty print JSON buffer" },
   { "<Space>p", group = "Projects" },
   { "<Space>s", group = "Search" },
   { "<Space>t", group = "Terminal" },
   { "<Space>v", group = "Vim" },
 })
+
+-- {{{1 nvim-bqf
+require("bqf").setup({
+    preview = {
+      auto_preview = false,
+    },
+})
+
+-- {{{1 nvim-surround
+require("nvim-surround").setup({})
 
 -- {{{1 oil.nvim
 require("oil").setup({
