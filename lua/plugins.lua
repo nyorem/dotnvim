@@ -118,6 +118,7 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('cmdline')
 
 vim.api.nvim_set_keymap('n', ':', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
+vim.api.nvim_set_keymap('n', 'q:', ':', { noremap = false })
 
 vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>', { desc = "Grep inside current directory" })
 vim.keymap.set('n', '<Space>sp', function()
