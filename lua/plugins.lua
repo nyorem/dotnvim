@@ -138,6 +138,8 @@ vim.keymap.set('n', '<C-p>', function()
 end, { desc = "Find a file in git repository" })
 vim.keymap.set('n', '<Space>fr', builtin.oldfiles, { desc = "List all recent files" })
 vim.keymap.set('n', '<Space>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true, desc = "List all git branches" })
+vim.keymap.set('n', '<Space>tr', ":Telescope resume<CR>", { noremap = true, silent = true, desc = "Resume last telescope picker" })
+vim.keymap.set('n', '<Space>tp', ":Telescope pickers<CR>", { noremap = true, silent = true, desc = "List previously used telescope pickers" })
 
 -- {{{1 toggleterm
 require("toggleterm").setup {
