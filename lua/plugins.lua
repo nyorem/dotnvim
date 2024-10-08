@@ -302,6 +302,7 @@ wk.add({
   { "<Space>gg", desc = "Git status" },
   { "<Space>gp", group = "Github" },
   { "<Space>jp", group = "Pretty print JSON buffer" },
+  { "<Space>m", desc = "Open man page" },
   { "<Space>p", group = "Projects" },
   { "<Space>s", group = "Search" },
   { "<Space>t", group = "Terminal" },
@@ -409,6 +410,7 @@ require("cmake-tools").setup{
 vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>', { desc = "Configure CMake project" })
 vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>', { desc = "Build CMake project" })
 vim.keymap.set('n', '<F8>', ':CMakeCloseExecutor<CR>', { desc = "Close CMake executor" })
+vim.keymap.set('n', '<F9>', ':CMakeSelectBuildTarget<CR>', { desc = "Select target to build" })
 
 -- {{{1 octo.nvim
 require("octo").setup({
