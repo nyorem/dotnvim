@@ -30,7 +30,6 @@ Plug 'pwntester/octo.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
 Plug 'stevearc/oil.nvim'
-Plug 'windwp/nvim-autopairs'
 
 vim.call("plug#end")
 
@@ -68,6 +67,7 @@ end
 local neogit = require("neogit")
 neogit.setup {
   disable_insert_on_commit = true,
+  auto_refresh = true,
 }
 -- vim.keymap.set('n', '<Space>gg', function()
 --   local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
@@ -179,7 +179,6 @@ require("noice").setup({
   presets = {
     bottom_search = true, -- use a classic bottom cmdline for search
     command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
   },
   -- remove the need of a NERD font
   cmdline = {
@@ -230,8 +229,6 @@ require("diffview").setup {
 }
 vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Open diffview" })
 
--- {{{1 nvim-autopairs
-require("nvim-autopairs").setup({})
 
 -- {{{1 nvim-dap
 local dap = require('dap')
@@ -417,6 +414,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- {{{1 cmake-tools.nvim
 require("cmake-tools").setup{
     cmake_generate_options = {
+      "-DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE",
       "-DENABLE_STANDALONE=TRUE",
       "-DENABLE_CDS=FALSE",
       "-DENABLE_TEST=TRUE",
@@ -425,11 +423,14 @@ require("cmake-tools").setup{
       "-DENABLE_DM=TRUE",
       "-DREST_API_VERSION=2",
       "-DENABLE_GTEST_DISCOVER=TRUE",
+      "-DSPDLOG_FMT_EXTERNAL=FALSE",
       "-DENABLE_EVCI=TRUE",
       "-DENABLE_OCPP16=TRUE",
     },
     cmake_build_options = { "-j8" },
     cmake_build_directory = "./build",
+    cmake_regenerate_on_save = false,
+    cmake_soft_link_compile_commands = true,
     cmake_executor = {
       name = "quickfix",
       default_opts = {
@@ -450,6 +451,7 @@ require("cmake-tools").setup{
 
 vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>', { desc = "Configure CMake project" })
 vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>', { desc = "Build CMake project" })
+vim.keymap.set('n', '<Space><F7>', ':CMakeStopExecutor<CR>', { desc = "Stop current CMake executor" })
 vim.keymap.set('n', '<F8>', ':CMakeCloseExecutor<CR>', { desc = "Close CMake executor" })
 vim.keymap.set('n', '<F9>', ':CMakeSelectBuildTarget<CR>', { desc = "Select target to build" })
 
