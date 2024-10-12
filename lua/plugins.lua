@@ -5,7 +5,6 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
-Plug 'Civitasv/cmake-tools.nvim'
 Plug 'folke/noice.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
@@ -410,51 +409,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-
--- {{{1 cmake-tools.nvim
-require("cmake-tools").setup{
-    cmake_generate_options = {
-      "-DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE",
-      "-DENABLE_STANDALONE=TRUE",
-      "-DENABLE_CDS=FALSE",
-      "-DENABLE_TEST=TRUE",
-      "-DENABLE_RUN_TESTS_AFTER_BUILD=FALSE",
-      "-DENABLE_SRR=TRUE",
-      "-DENABLE_DM=TRUE",
-      "-DREST_API_VERSION=2",
-      "-DENABLE_GTEST_DISCOVER=TRUE",
-      "-DSPDLOG_FMT_EXTERNAL=FALSE",
-      "-DENABLE_EVCI=TRUE",
-      "-DENABLE_OCPP16=TRUE",
-    },
-    cmake_build_options = { "-j8" },
-    cmake_build_directory = "./build",
-    cmake_regenerate_on_save = false,
-    cmake_soft_link_compile_commands = true,
-    cmake_executor = {
-      name = "quickfix",
-      default_opts = {
-        quickfix = {
-          size = 20,
-          auto_close_when_success = false,
-        },
-        toggleterm = {
-          direction = "horizontal",
-          auto_scroll = true,
-        },
-        terminal = {
-          split_size = 20,
-        },
-      },
-    },
-}
-
-vim.keymap.set('n', '<F6>', ':CMakeGenerate<CR>', { desc = "Configure CMake project" })
-vim.keymap.set('n', '<F7>', ':CMakeBuild<CR>', { desc = "Build CMake project" })
-vim.keymap.set('n', '<Space><F7>', ':CMakeStopExecutor<CR>', { desc = "Stop current CMake executor" })
-vim.keymap.set('n', '<F8>', ':CMakeCloseExecutor<CR>', { desc = "Close CMake executor" })
-vim.keymap.set('n', '<F9>', ':CMakeSelectBuildTarget<CR>', { desc = "Select target to build" })
-
 -- {{{1 octo.nvim
 require("octo").setup({
     enable_builtin = true,
@@ -480,6 +434,7 @@ vim.g.lightline = { colorscheme = 'catppuccin' }
 
 -- {{{1 other stuff
 vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configuration" })
+vim.keymap.set('n', '<F7>', ':Make<CR>', { desc = "Build project" })
 
 vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
