@@ -477,7 +477,7 @@ vim.o.termguicolors = true
 vim.g.lightline = { colorscheme = 'catppuccin' }
 
 -- {{{1 other stuff
-vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configurtion" })
+vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configuration" })
 
 vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
