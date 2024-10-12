@@ -6,15 +6,16 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'Civitasv/cmake-tools.nvim'
+Plug 'folke/noice.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
-Plug 'jonarrien/telescope-cmdline.nvim'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'ldelossa/nvim-dap-projects'
 Plug 'kylechui/nvim-surround'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
+Plug 'MunifTanjim/nui.nvim'
 Plug 'natecraddock/sessions.nvim'
 Plug 'natecraddock/workspaces.nvim'
 Plug 'NeogitOrg/neogit'
@@ -29,6 +30,7 @@ Plug 'pwntester/octo.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'sindrets/diffview.nvim'
 Plug 'stevearc/oil.nvim'
+Plug 'windwp/nvim-autopairs'
 
 vim.call("plug#end")
 
@@ -104,20 +106,11 @@ require('telescope').setup {
   },
   extensions = {
     cmdline = {
-      picker = {
-        layout_config = {
-          width  = 130,
-          height = 40,
-        }
-      },
     },
   }
 }
 
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('cmdline')
-
-vim.api.nvim_set_keymap('n', '<leader><leader>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
 
 vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>', { desc = "Grep inside current directory" })
 vim.keymap.set('n', '<Space>sp', function()
@@ -181,6 +174,51 @@ require('gitsigns').setup {
 }
 vim.keymap.set('n', '<Space>gB', ':Gitsigns toggle_current_line_blame<CR>', { desc = "Toggle git blame" })
 
+-- {{{1 noice.nvim
+require("noice").setup({
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+  },
+  -- remove the need of a NERD font
+  cmdline = {
+    format = {
+      cmdline = { icon = ">" },
+      search_down = { icon = "🔍⌄" },
+      search_up = { icon = "🔍⌃" },
+      filter = { icon = "$" },
+      lua = { icon = "☾" },
+      help = { icon = "?" },
+    },
+  },
+  format = {
+    level = {
+      icons = {
+        error = "✖",
+        warn = "▼",
+        info = "●",
+      },
+    },
+  },
+  popupmenu = {
+    kind_icons = false,
+  },
+  inc_rename = {
+    cmdline = {
+      format = {
+        IncRename = { icon = "⟳" },
+      },
+    },
+  },
+  routes = {
+    {
+      filter = { event = "msg_show", find = "written" },
+      opts = { skip = true },
+    }
+  },
+})
+
 -- {{{1 diffview.nvim
 require("diffview").setup {
   use_icons = false,
@@ -192,17 +230,20 @@ require("diffview").setup {
 }
 vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Open diffview" })
 
+-- {{{1 nvim-autopairs
+require("nvim-autopairs").setup({})
+
 -- {{{1 nvim-dap
 local dap = require('dap')
 local dapui = require("dapui")
 
 dapui.setup()
 
-dap.adapters.cppdbg = {
-  id = 'cppdbg',
-  type = 'executable',
-  command = vim.env.HOME .. '/dev/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
-}
+-- dap.adapters.cppdbg = {
+--   id = 'cppdbg',
+--   type = 'executable',
+--   command = vim.env.HOME .. '/dev/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
+-- }
 
 dap.configurations.cpp = {
   {
