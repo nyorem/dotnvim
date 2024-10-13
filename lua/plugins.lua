@@ -3,6 +3,7 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "~/.config/nvim/bundle")
 
+Plug 'AckslD/nvim-neoclip.lua'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
 Plug 'folke/noice.nvim'
@@ -228,6 +229,12 @@ require("diffview").setup {
 }
 vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Open diffview" })
 
+-- {{{1 neoclip
+require("neoclip").setup({
+    history = 100,
+    default_register = '+',
+})
+vim.keymap.set('n', '<Space>tp', ':Telescope neoclip<CR>', { desc = "List all previous yanks" })
 
 -- {{{1 nvim-dap
 local dap = require('dap')
