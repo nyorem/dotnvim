@@ -436,6 +436,20 @@ vim.g.lightline = { colorscheme = 'catppuccin' }
 vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configuration" })
 vim.keymap.set('n', '<F7>', ':Make<CR>', { desc = "Build project" })
 
+-- I don't know why I have to  duplicate these lines from my vim configuration
+vim.cmd [[
+  let g:lightline = {
+        \ 'colorscheme': 'catppuccin',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'FugitiveHead'
+        \ },
+        \ }
+]]
+
 vim.cmd [[
   autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
   autocmd FileType fzf silent! tunmap <Esc><Esc>
