@@ -210,12 +210,6 @@ require("noice").setup({
       },
     },
   },
-  routes = {
-    {
-      filter = { event = "msg_show", find = "written" },
-      opts = { skip = true },
-    }
-  },
 })
 
 -- {{{1 diffview.nvim
@@ -441,7 +435,6 @@ vim.g.lightline = { colorscheme = 'catppuccin' }
 
 -- {{{1 other stuff
 vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configuration" })
-vim.keymap.set('n', '<F7>', ':Make<CR>', { desc = "Build project" })
 
 -- I don't know why I have to  duplicate these lines from my vim configuration
 vim.cmd [[
