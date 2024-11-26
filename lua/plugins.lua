@@ -116,9 +116,9 @@ vim.keymap.set('n', '<Space>sd', ':Telescope live_grep<CR>', { desc = "Grep insi
 vim.keymap.set('n', '<Space>sp', function()
   local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
   if vim.v.shell_error == 0 then
-    require("telescope.builtin").live_grep({ noremap = true, cwd = root })
+    require("telescope").extensions.live_grep_args.live_grep_args({ noremap = true, cwd = root })
   else
-    require("telescope.builtin").live_grep({ noremap = true })
+    require("telescope").extensions.live_grep_args.live_grep_args({ noremap = true })
   end
 end, { desc = "Grep inside whole git repository" })
 
