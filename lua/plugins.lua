@@ -69,10 +69,10 @@ neogit.setup {
   disable_insert_on_commit = true,
   auto_refresh = true,
 }
--- vim.keymap.set('n', '<Space>gg', function()
---   local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
---   require("neogit").open({ cwd = cwd_without_oil })
--- end)
+vim.keymap.set('n', '<Space>gg', function()
+  local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
+  require("neogit").open({ cwd = cwd_without_oil })
+end)
 
 -- {{{1 workspaces and sessions
 require("workspaces").setup({
