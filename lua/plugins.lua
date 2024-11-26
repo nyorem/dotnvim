@@ -6,6 +6,7 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 Plug 'AckslD/nvim-neoclip.lua'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
+Plug 'ej-shafran/compile-mode.nvim'
 Plug 'folke/noice.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
@@ -37,6 +38,14 @@ vim.call("plug#end")
 require("catppuccin").setup({
     term_colors = true,
 })
+
+-- {{{1 compile-mode
+vim.g.compile_mode = {
+  default_command = "cd $(git rev-parse --show-toplevel) && cmake --build build -j8",
+  recompile_no_fail = true,
+}
+
+vim.keymap.set('n', '<Space>cc', ':tab Compile<CR>', { desc = "Compile the project" })
 
 -- {{{1 neovide
 if vim.g.neovide then
