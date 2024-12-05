@@ -6,6 +6,7 @@ vim.call("plug#begin", "~/.config/nvim/bundle")
 Plug 'AckslD/nvim-neoclip.lua'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'catppuccin/nvim'
+Plug 'echasnovski/mini.nvim'
 Plug 'ej-shafran/compile-mode.nvim'
 Plug 'folke/noice.nvim'
 Plug 'folke/which-key.nvim'
@@ -13,7 +14,6 @@ Plug 'github/copilot.vim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'ldelossa/nvim-dap-projects'
-Plug 'kylechui/nvim-surround'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'MunifTanjim/nui.nvim'
@@ -232,6 +232,12 @@ require("diffview").setup {
 }
 vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Open diffview" })
 
+-- {{{1 mini.nvim
+require('mini.ai').setup()
+require('mini.move').setup()
+require('mini.operators').setup()
+require('mini.surround').setup()
+
 -- {{{1 neoclip
 require("neoclip").setup({
     history = 100,
@@ -362,9 +368,6 @@ require("bqf").setup({
       auto_preview = false,
     },
 })
-
--- {{{1 nvim-surround
-require("nvim-surround").setup({})
 
 -- {{{1 oil.nvim
 -- Declare a global function to retrieve the current directory
