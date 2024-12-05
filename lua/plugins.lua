@@ -77,6 +77,7 @@ local neogit = require("neogit")
 neogit.setup {
   disable_insert_on_commit = true,
   auto_refresh = true,
+  process_spinner = false,
 }
 vim.keymap.set('n', '<Space>gg', function()
   local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
