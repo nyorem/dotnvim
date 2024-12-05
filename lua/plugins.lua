@@ -117,6 +117,9 @@ require('telescope').setup {
   extensions = {
     cmdline = {
     },
+    live_grep_args = {
+      auto_quoting = false,
+    },
   }
 }
 
