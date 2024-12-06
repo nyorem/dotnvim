@@ -11,6 +11,7 @@ Plug 'ej-shafran/compile-mode.nvim'
 Plug 'folke/noice.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'github/copilot.vim'
+Plug 'gbprod/yanky.nvim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'ldelossa/nvim-dap-projects'
@@ -186,6 +187,16 @@ require('gitsigns').setup {
   }
 }
 vim.keymap.set('n', '<Space>gB', ':Gitsigns toggle_current_line_blame<CR>', { desc = "Toggle git blame" })
+
+-- {{{1 yanky
+require("yanky").setup({})
+
+vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
+vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
+vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+vim.keymap.set("n", "<m-p>", "<Plug>(YankyPreviousEntry)")
+vim.keymap.set("n", "<m-n>", "<Plug>(YankyNextEntry)")
 
 -- {{{1 noice.nvim
 require("noice").setup({
