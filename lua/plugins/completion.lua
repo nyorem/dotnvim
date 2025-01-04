@@ -17,5 +17,5 @@ return {
   },
   {
     "github/copilot.vim",
-  }
+  },
 }

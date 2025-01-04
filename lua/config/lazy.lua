@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("config.base")
 require("config.autocmd")
+require("config.filetype")
 require("config.wsl")
 
 -- Setup lazy.nvim

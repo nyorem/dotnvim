@@ -14,17 +14,14 @@ return {
   {
     "tpope/vim-unimpaired",
     config = function()
-      vim.cmd [[
-        nmap ( [
-        nmap ) ]
-        omap ( [
-        omap ) ]
-        xmap ( [
-        xmap ) ]
-      ]]
+      vim.keymap.set({"n", "o", "x"}, "(", "[", { remap = true })
+      vim.keymap.set({"n", "o", "x"}, ")", "]", { remap = true })
     end,
   },
   {
     "tpope/vim-dispatch",
+  },
+  {
+    'romainl/vim-cool',
   },
 }

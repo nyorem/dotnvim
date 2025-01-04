@@ -1,7 +1,7 @@
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
-  enabled = false,
+  enabled = false, -- disabled because it's causing issues with neogit
   opts = {
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search

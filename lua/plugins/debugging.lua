@@ -47,8 +47,6 @@ return {
 
       vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end, { desc = "Start/Resume debugging session" })
       vim.keymap.set('n', '<Space>de', function()
-        local dap = require('dap')
-        local dapui = require("dapui")
         dap.terminate()
         dap.close()
         dapui.close()

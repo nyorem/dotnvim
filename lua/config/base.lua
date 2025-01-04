@@ -12,7 +12,7 @@ vim.opt.scrolloff = 3 -- Number of lines to see when scrolling
 vim.opt.shell = "bash" -- Default shell to use with :sh command
 vim.g.markdown_folding = 1 -- Enable header folding for Markdown files
 vim.opt.clipboard = "unnamedplus"  -- Use system clipboard
-vim.keymap.set("v", "<C-c>", "y")
+vim.keymap.set("v", "<C-c>", "y") -- Use <C-c> to copy in visual mode
 
 -- Searching
 vim.opt.ignorecase = true -- Case insensitive
@@ -89,11 +89,6 @@ vim.opt.tabstop = 2 -- Number of spaces corresponding to a tabulation
 vim.opt.softtabstop = 2 -- Spaces to delete if we delete a tab
 vim.opt.shiftwidth = 2 -- Spaces used for an indentation
 
-vim.cmd [[
-  autocmd TermOpen * tnoremap <Esc><Esc> <c-\><c-n>
-  autocmd FileType fzf silent! tunmap <Esc><Esc>
-]]
-
 -- fix issue when launching neovim inside a python virtual environment
 -- https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
 if vim.fn.exists("$VIRTUAL_ENV") == 1 then
@@ -112,7 +107,7 @@ vim.keymap.set("n", "<space>X", "<cmd>source %<cr>")
 vim.keymap.set("n", "<space>x", ":.lua<CR>")
 vim.keymap.set("v", "<space>x", ":lua<CR>")
 
-vim.keymap.set('n', '<Space>vv', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Edit neovim configuration" })
+vim.keymap.set('n', '<Space>vv', ':e $MYVIMRC<CR>', { desc = "Edit neovim configuration" })
 
 vim.cmd [[
 " Habit breaking, habit making
@@ -160,3 +155,5 @@ cnoremap w: w
 cnoremap ww w
 cnoremap qw wq
 ]]
+
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>") -- Exit terminal mode with <Esc><Esc>
