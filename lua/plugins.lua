@@ -30,7 +30,6 @@ Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'pwntester/octo.nvim'
 Plug 'rcarriga/nvim-dap-ui'
-Plug 'sindrets/diffview.nvim'
 Plug 'stevearc/oil.nvim'
 
 vim.call("plug#end")
@@ -235,17 +234,6 @@ require("noice").setup({
     },
   },
 })
-
--- {{{1 diffview.nvim
-require("diffview").setup {
-  use_icons = false,
-  keymaps = {
-    file_panel = {
-      { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close diffview" } },
-    }
-  }
-}
-vim.keymap.set('n', '<Space>gd', ":DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Open diffview" })
 
 -- {{{1 mini.nvim
 require('mini.ai').setup()
