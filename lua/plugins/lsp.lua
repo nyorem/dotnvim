@@ -21,7 +21,15 @@ return {
     require("lspconfig").lua_ls.setup { capabilities = capabilities }
 
     -- c/cpp
-    require("lspconfig").clangd.setup { capabilities = capabilities }
+    require("lspconfig").clangd.setup {
+      cmd = {
+        "clangd",
+        "-j=1",
+        "-background-index",
+        "--malloc-trim",
+      },
+      capabilities = capabilities,
+    }
 
     -- key mappings
     vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
