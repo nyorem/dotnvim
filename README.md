@@ -8,31 +8,4 @@ sudo apt install neovim
 python3 -m pip install --user --upgrade pynvim
 ```
 
-## Plugins setup
-
-- coc.nvim
-```
-:CocInstall coc-clangd coc-pyright
-```
-
-# Miscelleneous
-
-Create desktop entry for neovide:
-```
-[Desktop Entry]
-Name=neovide
-Exec=/path/to/neovide
-Terminal=false
-Type=Application
-Icon=/path/to/neovide.png
-```
-
-and then
-```shell
-sudo cp neovide.desktop /usr/share/applications
-```
-
-# References
-
-- https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
-- https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
+You can checkout the [vim-plug](https://github.com/nyorem/dotnvim/tree/vim-plug) branch to see my old configuration before I switched to [lazy.nvim](https://github.com/folke/lazy.nvim).
