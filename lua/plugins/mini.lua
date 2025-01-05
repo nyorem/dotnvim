@@ -6,7 +6,7 @@ return {
 
     require('mini.ai').setup()
     require('mini.move').setup()
-    require('mini.operators').setup()
+    require("mini.operators").setup({ replace = { prefix = '' } })
     require('mini.surround').setup()
     require('mini.pairs').setup()
   end,

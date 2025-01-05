@@ -107,8 +107,6 @@ vim.keymap.set("n", "<space>X", "<cmd>source %<cr>")
 vim.keymap.set("n", "<space>x", ":.lua<CR>")
 vim.keymap.set("v", "<space>x", ":lua<CR>")
 
-vim.keymap.set('n', '<Space>vv', ':e $MYVIMRC<CR>', { desc = "Edit neovim configuration" })
-
 vim.cmd [[
 " Habit breaking, habit making
 noremap <Up> <NOP>
