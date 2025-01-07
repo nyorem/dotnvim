@@ -44,6 +44,17 @@ return {
       vim.keymap.set("n", "<Space>cd", "<cmd>lua vim.lsp.buf.definition()<CR>")
       vim.keymap.set("n", "<Space>cr", "<cmd>lua vim.lsp.buf.references()<CR>")
 
+      vim.keymap.set("n", "<Space>co", vim.diagnostic.open_float, { desc = "Open diagnostics in floating window" })
+
+      vim.keymap.set("n", "<Space>ct", function()
+        local current = vim.diagnostic.config()
+        vim.diagnostic.config({
+          virtual_text = not current.virtual_text,
+          underline = not current.underline,
+          signs = not current.signs,
+        })
+      end, { desc = "Toggle diagnostics" })
+
       -- code formatting
       require("conform").setup({
           formatters_by_ft = {

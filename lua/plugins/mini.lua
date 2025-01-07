@@ -5,9 +5,11 @@ return {
     statusline.setup({ use_icons = true })
 
     require('mini.ai').setup()
+    require('mini.indentscope').setup()
     require('mini.move').setup()
     require("mini.operators").setup({ replace = { prefix = '' } })
-    require('mini.surround').setup()
     require('mini.pairs').setup()
+    require('mini.splitjoin').setup()
+    require('mini.surround').setup()
   end,
 }

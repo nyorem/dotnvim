@@ -90,4 +90,9 @@ return {
     config = function ()
     end
   },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = true,
+  }
 }

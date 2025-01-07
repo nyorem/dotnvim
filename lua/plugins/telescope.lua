@@ -72,5 +72,9 @@ return {
     vim.keymap.set('n', '<Space>tr', ":Telescope resume<CR>", { noremap = true, silent = true, desc = "Resume last telescope picker" })
 
     vim.keymap.set('n', '<Space>tp', ":Telescope pickers<CR>", { noremap = true, silent = true, desc = "List previously used telescope pickers" })
+
+    vim.keymap.set('n', '<Space>tk', ":Telescope keymaps<CR>", { noremap = true, silent = true, desc = "List keymaps" })
+
+    vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = "Spelling suggestions" })
   end,
 }
