@@ -92,7 +92,15 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
     version = "*",
-    config = true,
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require("git-conflict").setup({})
+
+      vim.keymap.set("n", "<Space>gr", ":Gwrite<CR>", { desc = "Mark conflicts as resolved" })
+    end,
   }
 }

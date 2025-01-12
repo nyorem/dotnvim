@@ -1,7 +1,7 @@
 return {
   {
     'saghen/blink.cmp',
-    version = 'v0.8.2',
+    version = 'v0.10.0',
     opts = {
       keymap = { preset = 'super-tab' },
       completion = {
