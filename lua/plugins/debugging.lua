@@ -12,11 +12,11 @@ return {
 
       dapui.setup()
 
-      -- dap.adapters.cppdbg = {
-      --   id = 'cppdbg',
-      --   type = 'executable',
-      --   command = vim.env.HOME .. '/dev/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
-      -- }
+      dap.adapters.cppdbg = {
+        id = 'cppdbg',
+        type = 'executable',
+        command = vim.env.HOME .. '/dev/bin/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7',
+      }
 
       dap.configurations.cpp = {
         {
@@ -28,6 +28,13 @@ return {
           end,
           cwd = '${workspaceFolder}',
           stopAtEntry = true,
+          setupCommands = {
+            {
+              text = '-enable-pretty-printing',
+              description =  'enable pretty printing',
+              ignoreFailures = false
+            },
+          },
         },
         {
           name = 'Attach to gdbserver :1234',
@@ -40,10 +47,18 @@ return {
           program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
           end,
+          setupCommands = {
+            {
+              text = '-enable-pretty-printing',
+              description =  'enable pretty printing',
+              ignoreFailures = false
+            },
+          },
         },
       }
 
       dap.configurations.c = dap.configurations.cpp
+      dap.configurations.rust = dap.configurations.cpp
 
       vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end, { desc = "Start/Resume debugging session" })
       vim.keymap.set('n', '<Space>de', function()

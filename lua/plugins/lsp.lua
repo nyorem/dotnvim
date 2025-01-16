@@ -39,6 +39,9 @@ return {
         capabilities = capabilities,
       }
 
+      -- python
+      require("lspconfig").pyright.setup { capabilities = capabilities }
+
       -- key mappings
       vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
       vim.keymap.set("n", "<Space>cd", "<cmd>lua vim.lsp.buf.definition()<CR>")
@@ -59,9 +62,17 @@ return {
       require("conform").setup({
           formatters_by_ft = {
             cpp = { "clang-format" },
+            python = {
+              -- To fix auto-fixable lint errors.
+              "ruff_fix",
+              -- To run the Ruff formatter.
+              "ruff_format",
+              -- To organize the imports.
+              "ruff_organize_imports",
+            }
           },
       })
-      vim.keymap.set({"n", "v"}, "<Space>cf", function() require("conform").format() end)
+      vim.keymap.set({"n", "v"}, "<Space>cf", function() require("conform").format() end, { desc = "Format selected code"} )
     end,
   },
   {
