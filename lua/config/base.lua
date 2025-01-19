@@ -56,9 +56,6 @@ function! ReadManVisual()
     call ReadMan(s:get_visual_selection())
 endfunction
 
-nnoremap <Space>m :call ReadManNormal()<CR>
-vnoremap <Space>m :call ReadManVisual()<CR>
-
 " Strip trailing whitespace
 function! StripWhitespace()
     let save_cursor = getpos(".")
@@ -68,9 +65,11 @@ function! StripWhitespace()
     call setreg('/', old_query)
 endfunction
 
-" ,ss : Strip trailing whitespaces
-nnoremap <leader>ss :call StripWhitespace()<CR>
 ]]
+
+vim.keymap.set("n", "<leader>ss", ":call StripWhitespace()<CR>", { desc = "Strip trailing whitespaces"} )
+vim.keymap.set("n", "<Space>m", ":call ReadManNormal()<CR>", { desc = "Open man page" })
+vim.keymap.set("v", "<Space>m", ":call ReadManVisual()<CR>", { desc = "Open man page" })
 
 -- {{{1 TEXT FORMATTING
 vim.opt.linebreak = true -- Don't cut words in the end of lines

@@ -17,7 +17,7 @@ return {
       vim.keymap.set('n', '<Space>gg', function()
         local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
         require("neogit").open({ cwd = cwd_without_oil })
-      end)
+      end, { desc = "Git status" })
     end,
   },
   {
@@ -61,9 +61,9 @@ return {
   {
     "tpope/vim-fugitive",
     config = function()
+      vim.keymap.set("n", "<Space>gl", ":tab Git log<CR>", { desc = "Git log" })
+
       vim.cmd [[
-      " nnoremap <Space>gg :tab Git<CR>
-      nnoremap <Space>gl :tab Git log<CR>
       autocmd User FugitiveIndex nmap <buffer> p :Git push<CR>
       autocmd User FugitiveIndex nmap <buffer> P :Git push --force-with-lease<CR>
       autocmd User FugitiveIndex nmap <buffer> f :Git fetch<CR>

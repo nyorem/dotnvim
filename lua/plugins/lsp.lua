@@ -43,9 +43,9 @@ return {
       require("lspconfig").pyright.setup { capabilities = capabilities }
 
       -- key mappings
-      vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-      vim.keymap.set("n", "<Space>cd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-      vim.keymap.set("n", "<Space>cr", "<cmd>lua vim.lsp.buf.references()<CR>")
+      vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Run code action" })
+      vim.keymap.set("n", "<Space>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
+      vim.keymap.set("n", "<Space>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find all references" })
 
       vim.keymap.set("n", "<Space>co", vim.diagnostic.open_float, { desc = "Open diagnostics in floating window" })
 
