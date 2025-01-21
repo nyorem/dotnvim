@@ -102,9 +102,9 @@ vim.keymap.set("n", "<C-Left>", "gT")
 vim.keymap.set("n", "<C-Right>", "gt")
 
 -- Source files, lines
-vim.keymap.set("n", "<space>X", "<cmd>source %<cr>")
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
+vim.keymap.set("n", "<space>X", "<cmd>source %<cr>", { desc = "Source current file" })
+vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Source current line" })
+vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source selected lines" })
 
 vim.cmd [[
 " Habit breaking, habit making

@@ -22,5 +22,12 @@ return {
     config = function()
       require("wildfire").setup()
     end,
-  }
+  },
+  {
+    "wurli/contextindent.nvim",
+    opts = { pattern = "*.md" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    }
+  },
 }

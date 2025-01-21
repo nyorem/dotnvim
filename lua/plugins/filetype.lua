@@ -1,3 +1,0 @@
-return {
-  "kergoth/vim-bitbake"
-}

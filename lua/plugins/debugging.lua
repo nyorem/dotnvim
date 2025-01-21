@@ -4,7 +4,6 @@ return {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
-        "ldelossa/nvim-dap-projects",
     },
     config = function()
       local dap = require('dap')
@@ -59,6 +58,7 @@ return {
 
       dap.configurations.c = dap.configurations.cpp
       dap.configurations.rust = dap.configurations.cpp
+      dap.configurations.oil = dap.configurations.cpp
 
       vim.keymap.set('n', '<Space>dd', function() require('dap').continue() end, { desc = "Start/Resume debugging session" })
       vim.keymap.set('n', '<Space>de', function()
@@ -70,8 +70,6 @@ return {
       vim.keymap.set('n', '<Space>dh', function() require('dap').step_out() end, { desc = "Step out" })
       vim.keymap.set('n', '<Space>dj', function() require('dap').step_over() end, { desc = "Step over" })
       vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() end, { desc = "Toggle breakpoint" })
-
-      require('nvim-dap-projects').search_project_config()
 
       dap.listeners.before.attach.dapui_config = function()
         dapui.open()
