@@ -4,6 +4,7 @@ return {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
+        "mfussenegger/nvim-dap-python",
     },
     config = function()
       local dap = require('dap')
@@ -55,6 +56,8 @@ return {
           },
         },
       }
+
+      require("dap-python").setup("python3")
 
       dap.configurations.c = dap.configurations.cpp
       dap.configurations.rust = dap.configurations.cpp

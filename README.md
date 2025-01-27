@@ -59,6 +59,11 @@ pip install ruff --break-system-packages
 
 - C/C++: [vscode-cpptools](https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)) installed in `$HOME/dev/bin/cpptools-linux/`
 
+- Python: [debugpy](https://github.com/microsoft/debugpy)
+```sh
+sudo apt install python3-debugpy
+```
+
 ## References
 
 You can checkout the [vim-plug](https://github.com/nyorem/dotnvim/tree/vim-plug) branch to see my old configuration before I switched to [lazy.nvim](https://github.com/folke/lazy.nvim).
