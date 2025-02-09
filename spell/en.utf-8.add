@@ -2,3 +2,6 @@ deserialize
 reserialize
 RestAPI
 UUID
+Jenkinsfile
+Yocto
+Coverity

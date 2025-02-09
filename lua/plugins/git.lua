@@ -63,6 +63,7 @@ return {
     config = function()
       vim.keymap.set("n", "<Space>gl", ":tab Git log<CR>", { desc = "Git log" })
 
+      -- TODO: use lua instead?
       vim.cmd [[
       autocmd User FugitiveIndex nmap <buffer> p :Git push<CR>
       autocmd User FugitiveIndex nmap <buffer> P :Git push --force-with-lease<CR>

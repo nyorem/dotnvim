@@ -27,7 +27,6 @@ return {
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
           end,
           cwd = '${workspaceFolder}',
-          stopAtEntry = true,
           setupCommands = {
             {
               text = '-enable-pretty-printing',

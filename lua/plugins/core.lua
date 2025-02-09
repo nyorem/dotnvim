@@ -24,4 +24,10 @@ return {
   {
     'romainl/vim-cool',
   },
+  {
+    "lambdalisue/vim-suda",
+    config = function()
+      vim.keymap.set("c", "w!!", ":SudaWrite")
+    end
+  },
 }

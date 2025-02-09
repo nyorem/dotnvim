@@ -1,3 +1,4 @@
+-- TODO: use lua instead?
 vim.cmd [[
     if executable('wslview')
         " see https://old.reddit.com/r/neovim/comments/olq8dw/defining_the_browse_command_for_use_with/

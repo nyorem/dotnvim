@@ -22,6 +22,7 @@ vim.opt.smartcase = true -- Intelligent case (if caps -> take care of the case)
 vim.opt.foldmethod = "marker"
 
 -- {{{1 USEFUL FUNCTIONS
+-- TODO: use lua instead?
 vim.cmd [[
 function! ReadMan(text)
   :exe ":tabnew"
@@ -64,7 +65,6 @@ function! StripWhitespace()
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
-
 ]]
 
 vim.keymap.set("n", "<leader>ss", ":call StripWhitespace()<CR>", { desc = "Strip trailing whitespaces"} )
@@ -77,9 +77,11 @@ vim.opt.showbreak = "…" -- Starting character when a line is too long
 vim.opt.smartindent = true -- Intelligent indentation
 
 -- INVISIBLES
-vim.cmd [[
-set listchars=tab:▸\ ,trail:·,nbsp:_	" Invisible characters
-]]
+vim.opt.listchars = {
+    tab = "▸ ",
+    trail = "·",
+    nbsp = "␣",
+}
 vim.opt.list = true -- Display invisible characters
 
 -- TABS/SPACES PARAMETERS
@@ -106,51 +108,42 @@ vim.keymap.set("n", "<space>X", "<cmd>source %<cr>", { desc = "Source current fi
 vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Source current line" })
 vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source selected lines" })
 
-vim.cmd [[
-" Habit breaking, habit making
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
+-- Habit breaking, habit making
+vim.keymap.set({"n", "i"}, "<Up>", "<NOP>")
+vim.keymap.set({"n", "i"}, "<Left>", "<NOP>")
+vim.keymap.set({"n", "i"}, "<Right>", "<NOP>")
+vim.keymap.set({"n", "i"}, "<Down>", "<NOP>")
 
-" Sudo write a file
-cmap w!! w !sudo tee > /dev/null %
+-- Duplicate current buffer in new tab
+vim.keymap.set("n", "<C-w>T", ":tab split<CR>")
 
-" Duplicate current buffer in new tab
-nnoremap <C-w>T :tab split<CR>
+-- Restore ','
+vim.keymap.set("n", ",,", ",")
 
-" Restore ','
-nnoremap ,, ,
+-- Don't lose selection when shifting sideways
+vim.keymap.set("x", "<", "<gv")
+vim.keymap.set("x", ">", ">gv")
 
-" Keep search matches in the middle of the window
-" and keep the same directions no matter we used '/' or '?'
-nnoremap <expr> n  'Nn'[v:searchforward].'zvzz'
-nnoremap <expr> N  'nN'[v:searchforward].'zvzz'
+-- Abolish Ex mode
+vim.keymap.set("n", "Q", "@q")
+vim.keymap.set("v", "Q", ":norm @q<CR>")
 
-" Don't lose selection when shifting sidewards
-xnoremap <  <gv
-xnoremap >  >gv
+-- Keep search matches in the middle of the window
+-- and keep the same directions no matter we used '/' or '?'
+vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zvzz'", { expr = true})
+vim.keymap.set("n", "N", "'nN'[v:searchforward].'zvzz'", { expr = true})
 
-" Abolish Ex mode
-nnoremap Q @q
-vnoremap Q :norm @q<cr>
+-- Avoid lowercasing selected text in visual mode
+vim.keymap.set("v", "u", "<NOP>")
 
-" Avoid lowercasing selected text in visual mode
-vnoremap u <NOP>
+-- ,m : maximize the current window
+vim.keymap.set("n", "<leader>m", "<C-W>_<C-W><Bar>")
 
-" ,m : maximize the current window
-nnoremap <leader>m <C-W>_<C-W><Bar>
+-- Don't save files named ':'
+vim.keymap.set("c", "w:", "w")
 
-" Don't save files named ':'
-cnoremap w: w
-
-" Common mistakes
-cnoremap ww w
-cnoremap qw wq
-]]
+-- Common mistakes
+vim.keymap.set("c", "ww", "w")
+vim.keymap.set("c", "qw", "wq")
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>") -- Exit terminal mode with <Esc><Esc>
