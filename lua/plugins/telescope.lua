@@ -68,5 +68,7 @@ return {
     vim.keymap.set('n', '<Space>tk', ":Telescope keymaps<CR>", { noremap = true, silent = true, desc = "List keymaps" })
 
     vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = "Spelling suggestions" })
+
+    vim.keymap.set('n', '<Space>fs', builtin.lsp_document_symbols, { desc = "LSP Document symbols" })
   end,
 }
