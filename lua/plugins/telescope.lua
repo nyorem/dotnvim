@@ -70,5 +70,7 @@ return {
     vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = "Spelling suggestions" })
 
     vim.keymap.set('n', '<Space>fs', builtin.lsp_document_symbols, { desc = "LSP Document symbols" })
+
+    vim.keymap.set({'n', 'v'}, '<Space>sw', builtin.grep_string, { desc = "Grep current word" })
   end,
 }
