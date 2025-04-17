@@ -80,7 +80,7 @@ return {
     cmd = "Trouble",
     keys = {
       {
-        "<Space>cm",
+        "<Space>cx",
         "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
         desc = "Diagnostics (Trouble)",
       },

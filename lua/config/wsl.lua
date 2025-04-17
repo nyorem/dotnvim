@@ -9,4 +9,7 @@ vim.cmd [[
 
         command! -nargs=1 Browse call OpenBrowserWsl(<f-args>)
     endif
+
+    " <ctrl-i> and <tab> are the same in terminal vim, so we need to remap it
+    nnoremap <C-n>i <C-i>
 ]]

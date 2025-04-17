@@ -6,3 +6,11 @@ vim.api.nvim_create_autocmd('FileType', {
         vim.keymap.set("n", "<F7>", "<cmd>Make<CR>", { buffer = true })
     end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'NeogitConsole',
+    group = vim.api.nvim_create_augroup('neogit', { clear = true }),
+    callback = function()
+        vim.opt.swapfile = false
+    end,
+})

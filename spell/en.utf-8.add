@@ -5,3 +5,9 @@ UUID
 Jenkinsfile
 Yocto
 Coverity
+Valgrind
+Cobertura
+CMake
+Jenkinsfiles
+subpath
+env
