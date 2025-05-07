@@ -155,4 +155,22 @@ vim.keymap.set("c", "w:", "w")
 vim.keymap.set("c", "ww", "w")
 vim.keymap.set("c", "qw", "wq")
 
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>") -- Exit terminal mode with <Esc><Esc>
+-- Exit terminal mode with <Esc><Esc>
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+
+-- Search within visual selection - this is magic
+-- https://old.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/mo9nalp/
+vim.keymap.set("x", "/", "<Esc>/\\%V") 
+
+-- Duplicate line and comment first line
+-- https://old.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/mo9t5xq/
+vim.keymap.set("n", "ycc", function() return 'yy' .. vim.v.count1 .. "gcc']p" end, { remap = true, expr = true })
+
+-- Keep cursor position when joining lines
+-- https://old.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/mo9z1pd/
+vim.keymap.set("n", "J", "mzJ`z:delmarks z<cr>")
+
+-- Block insert in line visual mode
+-- https://old.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/moelhto/
+vim.keymap.set('x', 'I', function() return vim.fn.mode() == 'V' and '^<C-v>I' or 'I' end, { expr = true })
+vim.keymap.set('x', 'A', function() return vim.fn.mode() == 'V' and '$<C-v>A' or 'A' end, { expr = true })
