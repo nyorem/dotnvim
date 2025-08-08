@@ -1,5 +1,6 @@
 return {
   {
+     -- LSP and code formatting
     "neovim/nvim-lspconfig",
     dependencies = {
       "saghen/blink.cmp",
@@ -76,6 +77,7 @@ return {
     end,
   },
   {
+    -- show diagnostics in quickfix list
     "folke/trouble.nvim",
     cmd = "Trouble",
     keys = {

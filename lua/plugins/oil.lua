@@ -1,4 +1,5 @@
 return {
+  -- netrw of the future
   'stevearc/oil.nvim',
   config = function()
     -- Declare a global function to retrieve the current directory

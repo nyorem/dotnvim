@@ -1,4 +1,5 @@
 return {
+  -- the best theme
   "catppuccin/nvim",
   name = "catppuccin",
   priority = 1000,

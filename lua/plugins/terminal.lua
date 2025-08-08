@@ -1,8 +1,10 @@
 return {
   {
+    -- nested neovim sessions inside terminal
     "brianhuster/unnest.nvim"
   },
   {
+    -- toggleable terminal window
     'akinsho/toggleterm.nvim',
     config = function()
       require("toggleterm").setup {

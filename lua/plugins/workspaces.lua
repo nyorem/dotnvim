@@ -1,5 +1,6 @@
 return {
   {
+    -- manage projects
     "natecraddock/workspaces.nvim",
     config = function()
       require("workspaces").setup({
@@ -17,6 +18,7 @@ return {
     end,
   },
   {
+    -- manage your sessions
     "natecraddock/sessions.nvim",
     config = function()
       require("sessions").setup({

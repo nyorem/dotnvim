@@ -1,4 +1,5 @@
 return {
+  -- experimental UI
   "folke/noice.nvim",
   event = "VeryLazy",
   enabled = false, -- disabled because it's causing issues with neogit

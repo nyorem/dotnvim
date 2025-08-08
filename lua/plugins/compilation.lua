@@ -1,4 +1,6 @@
 return {
+  -- emacs compile mode
+  -- use <C-r> to recompile
   "ej-shafran/compile-mode.nvim",
   config = function()
     vim.g.compile_mode = {

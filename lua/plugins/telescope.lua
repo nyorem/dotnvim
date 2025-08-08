@@ -1,4 +1,5 @@
 return {
+  -- THE extensible picker
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',

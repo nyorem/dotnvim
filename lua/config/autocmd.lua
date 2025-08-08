@@ -1,3 +1,4 @@
+-- set makerg in C files
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'cmake,c,cpp',
     group = vim.api.nvim_create_augroup('makeprg', { clear = true }),
@@ -7,6 +8,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+-- don't use swapfiles for neogit buffers
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'NeogitConsole',
     group = vim.api.nvim_create_augroup('neogit', { clear = true }),

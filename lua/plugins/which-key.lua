@@ -1,4 +1,5 @@
 return {
+  -- don't forget your keybindings
   "folke/which-key.nvim",
   config = function()
     vim.o.timeout = true
@@ -28,7 +29,7 @@ return {
       { "<Space>gp", group = "Github" },
       { "<Space>p", group = "Projects" },
       { "<Space>s", group = "Search" },
-      { "<Space>t", group = "Terminal" },
+      { "<Space>t", group = "Terminal & Telescope" },
     })
   end,
 }

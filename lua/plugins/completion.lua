@@ -1,5 +1,6 @@
 return {
   {
+    -- lightning fast completion
     'saghen/blink.cmp',
     version = 'v1.6.0',
     opts = {
@@ -7,6 +8,7 @@ return {
     },
   },
   {
+    -- your best AI coding assistant
     "github/copilot.vim",
     config = function()
       -- do not use <tab> for accepting suggestions as it conflicts with autocompletion

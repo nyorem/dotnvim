@@ -1,5 +1,6 @@
 return {
   {
+    -- debug your code
     "mfussenegger/nvim-dap",
     dependencies = {
         "rcarriga/nvim-dap-ui",

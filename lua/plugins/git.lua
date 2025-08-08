@@ -1,5 +1,6 @@
 return {
   {
+    -- magit like plugin
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
@@ -21,6 +22,7 @@ return {
     end,
   },
   {
+    -- git information in buffers
     "lewis6991/gitsigns.nvim",
     config = function()
       require('gitsigns').setup {
@@ -39,6 +41,7 @@ return {
     end,
   },
   {
+    -- github integration
     "pwntester/octo.nvim",
     config = function()
       require("octo").setup({
@@ -59,6 +62,7 @@ return {
     end,
   },
   {
+    -- when you need one more git helper
     "tpope/vim-fugitive",
     config = function()
       vim.keymap.set("n", "<Space>gl", ":tab Git log<CR>", { desc = "Git log" })
@@ -79,11 +83,13 @@ return {
     end,
   },
   {
+    -- enable GBrowse
     "tpope/vim-rhubarb",
     config = function ()
     end
   },
   {
+    -- git log integration in vim
     "junegunn/gv.vim",
     dependencies = {
       "tpope/vim-fugitive",
@@ -92,6 +98,7 @@ return {
     end
   },
   {
+    -- solve merge conflicts
     "akinsho/git-conflict.nvim",
     dependencies = {
       "tpope/vim-fugitive",
