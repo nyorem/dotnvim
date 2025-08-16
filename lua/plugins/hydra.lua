@@ -1,6 +1,7 @@
 return {
   -- custom submodes and menus (clone of emacs hydra package)
   "nvimtools/hydra.nvim",
+  enabled = false,
   dependencies = {
   },
   config = function()
