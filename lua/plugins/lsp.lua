@@ -44,6 +44,7 @@ return {
       require("lspconfig").pyright.setup { capabilities = capabilities }
 
       -- key mappings
+      vim.keymap.set("n", "<Space>cs", ":ClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
       vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Run code action" })
       vim.keymap.set("n", "<Space>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
       vim.keymap.set("n", "<Space>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find all references" })
