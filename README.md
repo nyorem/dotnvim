@@ -43,6 +43,11 @@ sudo apt install clangd
 pip install pyright --break-system-packages
 ```
 
+- Markdown: marksman](https://github.com/artempyanykh/marksman)
+```sh
+sudo snap install marksman
+```
+
 ## Formatters
 
 - C/C++: [clang-format](https://clang.llvm.org/docs/ClangFormat.html)

@@ -4,7 +4,6 @@ return
     -- emacs compile mode
     -- use <C-r> to recompile
     "ej-shafran/compile-mode.nvim",
-    enabled = false,
     config = function()
       vim.g.compile_mode = {
         default_command = "cd $(git rev-parse --show-toplevel) && cmake --build build -j8",
@@ -17,6 +16,7 @@ return
   {
     "pohlrabi404/compile.nvim",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       term_win_opts = {
         split = "right",

@@ -43,6 +43,9 @@ return {
       -- python
       require("lspconfig").pyright.setup { capabilities = capabilities }
 
+      -- markdown
+      require("lspconfig").marksman.setup { capabilities = capabilities }
+
       -- key mappings
       vim.keymap.set("n", "<Space>cs", ":ClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
       vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Run code action" })
