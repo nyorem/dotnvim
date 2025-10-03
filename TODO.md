@@ -20,7 +20,7 @@
     <Space>tk for key mappings
 
 - yanky.vim:
-    better <Space>y mapping
+    find a better <Space>y mapping?
 
 # TODO
 

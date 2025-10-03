@@ -75,4 +75,9 @@ return {
       })
     end,
   },
+  {
+    "SCJangra/table-nvim",
+    ft = "markdown",
+    opts = {},
+  }
 }

@@ -27,10 +27,13 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- lua
-      require("lspconfig").lua_ls.setup { capabilities = capabilities }
+      vim.lsp.config("lua_ls", {
+        capabilities = capabilities,
+      })
+      vim.lsp.enable({"lua_ls"})
 
       -- c/cpp
-      require("lspconfig").clangd.setup {
+      vim.lsp.config("clangd", {
         cmd = {
           "clangd",
           "-j=1",
@@ -38,13 +41,20 @@ return {
           "--malloc-trim",
         },
         capabilities = capabilities,
-      }
+      })
+      vim.lsp.enable({"clangd"})
 
       -- python
-      require("lspconfig").pyright.setup { capabilities = capabilities }
+      vim.lsp.config("pyright", {
+        capabilities = capabilities,
+      })
+      vim.lsp.enable({"pyright"})
 
       -- markdown
-      require("lspconfig").marksman.setup { capabilities = capabilities }
+      vim.lsp.config("marksman", {
+        capabilities = capabilities,
+      })
+      vim.lsp.enable({"marksman"})
 
       -- key mappings
       vim.keymap.set("n", "<Space>cs", ":ClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })

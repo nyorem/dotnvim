@@ -29,5 +29,5 @@ return {
       vim.keymap.set('n', '<Space>ps', ':SessionsSave<CR>', { desc = "Save current session" })
       vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>', { desc = "Restore last session" })
     end,
-  }
+  },
 }
