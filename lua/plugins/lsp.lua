@@ -26,6 +26,10 @@ return {
       -- blink
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+      -- turn off logging to avoid huge file ($HOME/.local/state/nvim/lsp.log)
+      vim.lsp.log.set_level("off")
+      -- vim.lsp.log.set_level("debug") -- to turn it back on
+
       -- lua
       vim.lsp.config("lua_ls", {
         capabilities = capabilities,
@@ -63,6 +67,11 @@ return {
       vim.keymap.set("n", "<Space>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find all references" })
 
       vim.keymap.set("n", "<Space>co", vim.diagnostic.open_float, { desc = "Open diagnostics in floating window" })
+
+      vim.keymap.set("n", "<Space>ch", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        vim.notify(vim.lsp.inlay_hint.is_enabled() and "Inlay hints enabled" or "Inlay hints disabled")
+      end, { desc = "Show inlay hints" })
 
       vim.keymap.set("n", "<Space>ct", function()
         local current = vim.diagnostic.config()
