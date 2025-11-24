@@ -1,6 +1,7 @@
 return {
   -- ctest integration
   "nyorem/ctest-telescope.nvim",
+  enabled = false,
   dependencies = {
     "akinsho/toggleterm.nvim"
   },
