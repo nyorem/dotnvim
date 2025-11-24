@@ -21,11 +21,6 @@ return {
     end,
   },
   {
-    -- asychronous task dispatcher
-    -- TODO: replace with overseer.nvim?
-    "tpope/vim-dispatch",
-  },
-  {
     -- disable search highlighting when you are done with searching
     'romainl/vim-cool',
   },
