@@ -1,7 +1,7 @@
 -- {{{1 BASIC OPTIONS
 -- Leader
-vim.g.mapleader = ","
-vim.g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- UI
 vim.opt.number = true -- Show line numbers
@@ -67,9 +67,9 @@ function! StripWhitespace()
 endfunction
 ]]
 
-vim.keymap.set("n", "<leader>ss", ":call StripWhitespace()<CR>", { desc = "Strip trailing whitespaces"} )
-vim.keymap.set("n", "<Space>m", ":call ReadManNormal()<CR>", { desc = "Open man page" })
-vim.keymap.set("v", "<Space>m", ":call ReadManVisual()<CR>", { desc = "Open man page" })
+vim.keymap.set("n", "<Leader>us", ":call StripWhitespace()<CR>", { desc = "Strip trailing whitespaces"} )
+vim.keymap.set("n", "<Leader>m", ":call ReadManNormal()<CR>", { desc = "Open man page" })
+vim.keymap.set("v", "<Leader>m", ":call ReadManVisual()<CR>", { desc = "Open man page" })
 
 -- {{{1 TEXT FORMATTING
 vim.opt.linebreak = true -- Don't cut words in the end of lines
@@ -104,9 +104,9 @@ vim.keymap.set("n", "<C-Left>", "gT")
 vim.keymap.set("n", "<C-Right>", "gt")
 
 -- Source files, lines
-vim.keymap.set("n", "<space>X", "<cmd>source %<cr>", { desc = "Source current file" })
-vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Source current line" })
-vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source selected lines" })
+vim.keymap.set("n", "<Leader>X", "<cmd>source %<cr>", { desc = "Source current file" })
+vim.keymap.set("n", "<Leader>x", ":.lua<CR>", { desc = "Source current line" })
+vim.keymap.set("v", "<Leader>x", ":lua<CR>", { desc = "Source selected lines" })
 
 -- Habit breaking, habit making
 vim.keymap.set({"n", "i"}, "<Up>", "<NOP>")
@@ -148,7 +148,7 @@ vim.keymap.set("n", "N", "'nN'[v:searchforward].'zvzz'", { expr = true})
 vim.keymap.set("v", "u", "<NOP>")
 
 -- ,m : maximize the current window
-vim.keymap.set("n", "<leader>m", "<C-W>_<C-W><Bar>")
+vim.keymap.set("n", "<localleader>m", "<C-W>_<C-W><Bar>")
 
 -- Don't save files named ':'
 vim.keymap.set("c", "w:", "w")

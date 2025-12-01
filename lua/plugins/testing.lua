@@ -21,13 +21,13 @@ return
         }
       })
 
-      vim.keymap.set("n", "<Space>cG", function()
+      vim.keymap.set("n", "<Leader>cG", function()
         if vim.bo.filetype == "cpp" or vim.bo.filetype == "c" or vim.bo.filetype == "oil" then
           require("ctest-telescope").pick_test_and_debug()
         end
       end, { desc = "Debug unit test" })
 
-      vim.keymap.set("n", "<Space>cg", function()
+      vim.keymap.set("n", "<Leader>cg", function()
         if vim.bo.filetype == "cpp" or vim.bo.filetype == "c" or vim.bo.filetype == "oil" then
           require("ctest-telescope").run_test()
         end
@@ -45,10 +45,10 @@ return
       "orjangj/neotest-ctest",
     },
     keys = {
-      { "<Space>tt", "<cmd>Neotest run<cr>", desc = "Run test under cursor" },
-      { "<Space>ti", "<cmd>Neotest output<cr>", desc = "Test output" },
-      { "<Space>ts", "<cmd>Neotest summary<cr>", desc = "Summary" },
-      { "<Space>ta", "<cmd>lua require('neotest').run.run({ suite = true })<cr>", desc = "Run all tests" },
+      { "<Leader>tt", "<cmd>Neotest run<cr>", desc = "Run test under cursor" },
+      { "<Leader>ti", "<cmd>Neotest output<cr>", desc = "Test output" },
+      { "<Leader>ts", "<cmd>Neotest summary<cr>", desc = "Summary" },
+      { "<Leader>ta", "<cmd>lua require('neotest').run.run({ suite = true })<cr>", desc = "Run all tests" },
     },
     config = function()
       local neotest_ns = vim.api.nvim_create_namespace("neotest")

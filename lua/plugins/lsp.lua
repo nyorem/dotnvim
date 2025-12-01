@@ -61,19 +61,19 @@ return {
       vim.lsp.enable({"marksman"})
 
       -- key mappings
-      vim.keymap.set("n", "<Space>cs", ":ClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
-      vim.keymap.set("n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Run code action" })
-      vim.keymap.set("n", "<Space>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
-      vim.keymap.set("n", "<Space>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find all references" })
+      vim.keymap.set("n", "<Leader>cs", ":ClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
+      vim.keymap.set("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Run code action" })
+      vim.keymap.set("n", "<Leader>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
+      vim.keymap.set("n", "<Leader>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find all references" })
 
-      vim.keymap.set("n", "<Space>co", vim.diagnostic.open_float, { desc = "Open diagnostics in floating window" })
+      vim.keymap.set("n", "<Leader>co", vim.diagnostic.open_float, { desc = "Open diagnostics in floating window" })
 
-      vim.keymap.set("n", "<Space>ch", function()
+      vim.keymap.set("n", "<Leader>ch", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         vim.notify(vim.lsp.inlay_hint.is_enabled() and "Inlay hints enabled" or "Inlay hints disabled")
       end, { desc = "Show inlay hints" })
 
-      vim.keymap.set("n", "<Space>ct", function()
+      vim.keymap.set("n", "<Leader>ct", function()
         local current = vim.diagnostic.config()
         vim.diagnostic.config({
           virtual_text = not current.virtual_text,
@@ -96,7 +96,7 @@ return {
             }
           },
       })
-      vim.keymap.set({"n", "v"}, "<Space>cf", function() require("conform").format() end, { desc = "Format selected code"} )
+      vim.keymap.set({"n", "v"}, "<Leader>cf", function() require("conform").format() end, { desc = "Format selected code"} )
     end,
   },
   {
@@ -105,7 +105,7 @@ return {
     cmd = "Trouble",
     keys = {
       {
-        "<Space>cx",
+        "<Leader>cx",
         "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
         desc = "Diagnostics (Trouble)",
       },

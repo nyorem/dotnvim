@@ -22,14 +22,16 @@ return {
 
     wk.add({
       { "gc", group = "Comment" },
-      { "<Space>c", group = "LSP" },
-      { "<Space>d", group = "Debugging" },
-      { "<Space>f", group = "Files" },
-      { "<Space>g", group = "Git" },
-      { "<Space>gp", group = "Github" },
-      { "<Space>p", group = "Projects" },
-      { "<Space>s", group = "Search" },
-      { "<Space>t", group = "Terminal & Telescope & Testing" },
+      { "<Leader>c", group = "LSP" },
+      { "<Leader>d", group = "Debugging" },
+      { "<Leader>f", group = "Files" },
+      { "<Leader>g", group = "Git" },
+      { "<Leader>h", group = "Help" },
+      { "<Leader>gp", group = "Github" },
+      { "<Leader>p", group = "Projects" },
+      { "<Leader>s", group = "Search & Sessions" },
+      { "<Leader>t", group = "Terminal & Telescope & Testing" },
+      { "<Leader>u", group = "Utilities" },
     })
   end,
 }

@@ -11,8 +11,6 @@
 
 # Use more the following plugins
 
-- compile-mode: <Space>cc to compile and <C-r> to recompile
-
 - substitute.vim:
     get used to s mappings
 

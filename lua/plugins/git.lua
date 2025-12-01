@@ -15,7 +15,7 @@ return {
         auto_refresh = true,
         process_spinner = false,
       }
-      vim.keymap.set('n', '<Space>gg', function()
+      vim.keymap.set('n', '<Leader>gg', function()
         local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
         require("neogit").open({ cwd = cwd_without_oil })
       end, { desc = "Git status" })
@@ -37,7 +37,7 @@ return {
           delay = 0,
         }
       }
-      vim.keymap.set('n', '<Space>gB', ':Gitsigns toggle_current_line_blame<CR>', { desc = "Toggle git blame" })
+      vim.keymap.set('n', '<Leader>gB', ':Gitsigns toggle_current_line_blame<CR>', { desc = "Toggle git blame" })
     end,
   },
   {
@@ -54,19 +54,19 @@ return {
           },
       })
 
-      vim.keymap.set('n', '<Space>go', '<CMD>Octo<CR>', { desc = "Open Octo dashboard" })
-      vim.keymap.set('n', '<Space>gpc', ':Octo search is:pr archived:false author:@me is:open<CR>', { desc = "List all the PRs I created" })
-      vim.keymap.set('n', '<Space>gpa', ':Octo search is:pr archived:false assignee:@me is:open<CR>', { desc = "List all the PRs assigned to me" })
-      vim.keymap.set('n', '<Space>gpm', ':Octo search is:pr archived:false mentions:@me is:open<CR>', { desc = "List all the PRs where I am mentioned" })
-      vim.keymap.set('n', '<Space>gpr', ':Octo search is:pr archived:false review-requested:@me is:open<CR>', { desc = "List all the PRs where I am requested to review" })
-      vim.keymap.set('n', '<Space>gpc', ':Octo pr create<CR>', { desc = "Create a PR" })
+      vim.keymap.set('n', '<Leader>go', '<CMD>Octo<CR>', { desc = "Open Octo dashboard" })
+      vim.keymap.set('n', '<Leader>gpc', ':Octo search is:pr archived:false author:@me is:open<CR>', { desc = "List all the PRs I created" })
+      vim.keymap.set('n', '<Leader>gpa', ':Octo search is:pr archived:false assignee:@me is:open<CR>', { desc = "List all the PRs assigned to me" })
+      vim.keymap.set('n', '<Leader>gpm', ':Octo search is:pr archived:false mentions:@me is:open<CR>', { desc = "List all the PRs where I am mentioned" })
+      vim.keymap.set('n', '<Leader>gpr', ':Octo search is:pr archived:false review-requested:@me is:open<CR>', { desc = "List all the PRs where I am requested to review" })
+      vim.keymap.set('n', '<Leader>gpc', ':Octo pr create<CR>', { desc = "Create a PR" })
     end,
   },
   {
     -- when you need one more git helper
     "tpope/vim-fugitive",
     config = function()
-      vim.keymap.set("n", "<Space>gl", ":tab Git log<CR>", { desc = "Git log" })
+      vim.keymap.set("n", "<Leader>gl", ":tab Git log<CR>", { desc = "Git log" })
 
       -- TODO: use lua instead?
       vim.cmd [[
@@ -109,7 +109,7 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       require("git-conflict").setup({})
 
-      vim.keymap.set("n", "<Space>gr", ":Gwrite<CR>", { desc = "Mark conflicts as resolved" })
+      vim.keymap.set("n", "<Leader>gr", ":Gwrite<CR>", { desc = "Mark conflicts as resolved" })
     end,
   }
 }

@@ -11,7 +11,7 @@ return
         recompile_no_fail = true,
       }
 
-      vim.keymap.set('n', '<Space>cc', ':tab Compile<CR>', { desc = "Compile the project" })
+      vim.keymap.set('n', '<Leader>cc', ':tab Compile<CR>', { desc = "Compile the project" })
     end,
   },
   {

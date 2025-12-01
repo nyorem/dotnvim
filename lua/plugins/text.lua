@@ -22,7 +22,7 @@ return {
       vim.keymap.set("n", "<m-p>", "<Plug>(YankyPreviousEntry)")
       vim.keymap.set("n", "<m-n>", "<Plug>(YankyNextEntry)")
 
-      vim.keymap.set('n', '<Space>y', ":Telescope yank_history<CR>", { noremap = true, desc = "Yank Ring" })
+      vim.keymap.set('n', '<Leader>y', ":Telescope yank_history<CR>", { noremap = true, desc = "Yank Ring" })
     end
   },
   {

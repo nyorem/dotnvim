@@ -44,7 +44,7 @@ return {
               end
             end)
           end, desc = "Select" },
-          ["<Space>y"] = {function()
+          ["<Leader>y"] = {function()
             -- source: https://github.com/stevearc/oil.nvim/blob/fb8b101d7cb4727d8719ab6ed141330eca997d3f/lua/oil/actions.lua#L194
             local oil = require("oil")
             local entry = oil.get_cursor_entry()

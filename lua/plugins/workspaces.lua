@@ -12,9 +12,9 @@ return {
           },
       })
       require('telescope').load_extension('workspaces')
-      vim.keymap.set('n', '<Space>pa', ':WorkspacesAdd<CR>', { desc = "Add current directory to workspace list" })
-      vim.keymap.set('n', '<Space>pd', ':WorkspacesRemove<CR>', { desc = "Remove current directory from the workspace list" })
-      vim.keymap.set('n', '<Space>pp', ':Telescope workspaces<CR>', { desc = "List all workspaces" })
+      vim.keymap.set('n', '<Leader>pa', '<Cmd>WorkspacesAdd<CR>', { desc = "Add current directory to workspace list" })
+      vim.keymap.set('n', '<Leader>pd', '<Cmd>WorkspacesRemove<CR>', { desc = "Remove current directory from the workspace list" })
+      vim.keymap.set('n', '<Leader>pp', '<Cmd>Telescope workspaces<CR>', { desc = "List all workspaces" })
     end,
   },
   {
@@ -26,8 +26,8 @@ return {
           absolute = true,
       })
 
-      vim.keymap.set('n', '<Space>ps', ':SessionsSave<CR>', { desc = "Save current session" })
-      vim.keymap.set('n', '<Space>pr', ':SessionsLoad<CR>', { desc = "Restore last session" })
+      vim.keymap.set('n', '<Leader>ss', '<Cmd>SessionsSave<CR>', { desc = "Save current session" })
+      vim.keymap.set('n', '<Leader>sr', '<Cmd>SessionsLoad<CR>', { desc = "Restore last session" })
     end,
   },
 }

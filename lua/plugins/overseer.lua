@@ -7,7 +7,7 @@ return {
 
       overseer.setup()
 
-      vim.keymap.set("n", "<Space>cg", function()
+      vim.keymap.set("n", "<Leader>cg", function()
         overseer.run_task({ name = "CMake configure",
           params = {
             build_type = "debug",
@@ -16,11 +16,11 @@ return {
         }) end,
         { desc = "Configure with default arguments" })
 
-      vim.keymap.set("n", "<Space>cG", function()
+      vim.keymap.set("n", "<Leader>cG", function()
         overseer.run_task({ name = "CMake configure" }) end,
         { desc = "Configure with extra arguments" })
 
-      vim.keymap.set("n", "<Space>cc", function()
+      vim.keymap.set("n", "<Leader>cc", function()
         overseer.run_task({ name = "Build target",
           params = {
             target = "all",
@@ -29,7 +29,7 @@ return {
         })
       end, { desc = "Build with default arguments" })
 
-      vim.keymap.set("n", "<Space>cC", function()
+      vim.keymap.set("n", "<Leader>cC", function()
         overseer.run_task({ name = "Build target" })
       end, { desc = "Build with extra arguments" })
     end,
