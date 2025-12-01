@@ -47,7 +47,7 @@ return
     keys = {
       { "<Leader>tt", "<cmd>Neotest run<cr>", desc = "Run test under cursor" },
       { "<Leader>ti", "<cmd>Neotest output<cr>", desc = "Test output" },
-      { "<Leader>ts", "<cmd>Neotest summary<cr>", desc = "Summary" },
+      { "<Leader>ts", "<cmd>Neotest summary<cr>", desc = "Test summary" },
       { "<Leader>ta", "<cmd>lua require('neotest').run.run({ suite = true })<cr>", desc = "Run all tests" },
     },
     config = function()

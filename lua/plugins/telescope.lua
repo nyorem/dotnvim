@@ -41,11 +41,11 @@ return {
     telescope.load_extension("fzf")
 
     -- keymaps
-    vim.keymap.set('n', '<Space>sd',
+    vim.keymap.set('n', '<Leader>sd',
       require("telescope").extensions.live_grep_args.live_grep_args,
     { desc = "Grep inside current directory" })
 
-    vim.keymap.set('n', '<Space>sp', function()
+    vim.keymap.set('n', '<Leader>sp', function()
       local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
       if vim.v.shell_error == 0 then
         require("telescope").extensions.live_grep_args.live_grep_args({ noremap = true, cwd = root })
@@ -56,34 +56,34 @@ return {
 
     local builtin = require('telescope.builtin')
 
-    vim.keymap.set('n', '<Space>fn', function()
+    vim.keymap.set('n', '<Leader>fn', function()
       builtin.find_files({ cwd = vim.fn.stdpath("config") })
     end, { desc = "Search inside neovim configuration" })
 
-    vim.keymap.set('n', '<Space>hh', builtin.help_tags, { desc = "Search inside vim help" })
+    vim.keymap.set('n', '<Leader>hh', builtin.help_tags, { desc = "Search inside vim help" })
 
-    vim.keymap.set('n', '<Space>,', builtin.buffers, { desc = "List open buffers" })
+    vim.keymap.set('n', '<Leader>,', builtin.buffers, { desc = "List open buffers" })
 
-    vim.keymap.set('n', '<Space><Space>', builtin.find_files, { desc = "Find a file" })
+    vim.keymap.set('n', '<Leader><Leader>', builtin.find_files, { desc = "Find a file" })
 
     vim.keymap.set('n', '<C-p>', function()
       if not pcall(builtin.git_files) then builtin.find_files() end
     end, { desc = "Find a file in git repository" })
 
-    vim.keymap.set('n', '<Space>fr', builtin.oldfiles, { desc = "List all recent files" })
+    vim.keymap.set('n', '<Leader>fr', builtin.oldfiles, { desc = "List all recent files" })
 
-    vim.keymap.set('n', '<Space>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true, desc = "List all git branches" })
+    vim.keymap.set('n', '<Leader>gb', ":Telescope git_branches<CR>", { noremap = true, silent = true, desc = "List all git branches" })
 
-    vim.keymap.set('n', '<Space>tr', ":Telescope resume<CR>", { noremap = true, silent = true, desc = "Resume last telescope picker" })
+    vim.keymap.set('n', '<Leader>pr', ":Telescope resume<CR>", { noremap = true, silent = true, desc = "Resume last picker" })
 
-    vim.keymap.set('n', '<Space>tp', ":Telescope pickers<CR>", { noremap = true, silent = true, desc = "List previously used telescope pickers" })
+    vim.keymap.set('n', '<Leader>pl', ":Telescope pickers<CR>", { noremap = true, silent = true, desc = "List all available pickers" })
 
-    vim.keymap.set('n', '<Space>tk', ":Telescope keymaps<CR>", { noremap = true, silent = true, desc = "List keymaps" })
+    vim.keymap.set('n', '<Leader>pk', ":Telescope keymaps<CR>", { noremap = true, silent = true, desc = "List keymaps" })
 
     vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = "Spelling suggestions" })
 
-    vim.keymap.set('n', '<Space>fs', builtin.lsp_document_symbols, { desc = "LSP Document symbols" })
+    vim.keymap.set('n', '<Leader>ps', builtin.lsp_document_symbols, { desc = "LSP Document symbols" })
 
-    vim.keymap.set({'n', 'v'}, '<Space>sw', builtin.grep_string, { desc = "Grep current word" })
+    vim.keymap.set({'n', 'v'}, '<Leader>sw', builtin.grep_string, { desc = "Grep current word" })
   end,
 }

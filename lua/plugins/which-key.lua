@@ -28,9 +28,9 @@ return {
       { "<Leader>g", group = "Git" },
       { "<Leader>h", group = "Help" },
       { "<Leader>gp", group = "Github" },
-      { "<Leader>p", group = "Projects" },
+      { "<Leader>p", group = "Projects & Pickers" },
       { "<Leader>s", group = "Search & Sessions" },
-      { "<Leader>t", group = "Terminal & Telescope & Testing" },
+      { "<Leader>t", group = "Terminal & Testing" },
       { "<Leader>u", group = "Utilities" },
     })
   end,
