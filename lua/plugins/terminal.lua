@@ -18,7 +18,7 @@ return {
         shade_terminals = false,
         -- autochdir = true,
       }
-      vim.keymap.set('n', '<Space>tt', ":ToggleTerm direction=vertical<CR>", { desc = "Open a terminal on the side" })
+      vim.keymap.set('n', '<Space>to', ":ToggleTerm direction=vertical<CR>", { desc = "Open a terminal on the side" })
     end,
   }
 }

@@ -29,7 +29,7 @@ return {
       { "<Space>gp", group = "Github" },
       { "<Space>p", group = "Projects" },
       { "<Space>s", group = "Search" },
-      { "<Space>t", group = "Terminal & Telescope" },
+      { "<Space>t", group = "Terminal & Telescope & Testing" },
     })
   end,
 }

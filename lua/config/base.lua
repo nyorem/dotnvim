@@ -117,6 +117,12 @@ vim.keymap.set({"n", "i"}, "<Down>", "<NOP>")
 -- Duplicate current buffer in new tab
 vim.keymap.set("n", "<C-w>T", ":tab split<CR>")
 
+-- Move between splits with less keys
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+
 -- Tab motions
 vim.keymap.set("n", "te", ":tabedit")
 vim.keymap.set("n", "<tab>", ":tabnext<CR>")
