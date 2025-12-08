@@ -6,6 +6,7 @@ return {
     statusline.setup({ use_icons = false })
 
     require('mini.ai').setup()
+    require('mini.icons').setup({ style = "glyph" })
     require('mini.indentscope').setup()
     require('mini.move').setup()
     require("mini.operators").setup({ replace = { prefix = '' }})

@@ -8,7 +8,7 @@ return {
           mru_sort = false,
           cd_type = "local",
           hooks = {
-            open = { "Telescope find_files" },
+            open = function() Snacks.picker.files() end,
           },
       })
       require('telescope').load_extension('workspaces')

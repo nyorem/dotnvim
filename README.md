@@ -29,6 +29,10 @@ other stuff:
 sudo apt install cmake shellcheck
 ```
 
+NERD font: https://www.nerdfonts.com/font-downloads
+- Windows: Caskaydia Cove Nerd Font
+
+
 ## LSPs
 
 - C/C++: [clangd](https://clangd.llvm.org/)
@@ -50,6 +54,7 @@ sudo snap install marksman
 
 - Bash: [bash-language-server](https://github.com/bash-lsp/bash-language-server)
 ```sh
+sudo apt install shellcheck
 sudo snap install bash-language-server --classic
 ```
 
