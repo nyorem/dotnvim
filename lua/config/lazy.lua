@@ -33,20 +33,16 @@ require("lazy").setup({
   change_detection = { enabled = false, notify = false },
   rocks = { enabled = false },
   ui = {
-    icons = {
-      cmd = "⌘",
-      config = "🛠",
-      event = "📅",
-      ft = "📂",
-      init = "⚙",
-      keys = "🗝",
-      plugin = "🔌",
-      runtime = "💻",
-      require = "🌙",
-      source = "📄",
-      start = "🚀",
-      task = "📌",
-      lazy = "💤 ",
+    border = "rounded",
+  },
+  performance = {
+    rtp = {
+      -- Stuff I don't use
+      disabled_plugins = {
+        'netrwPlugin',
+        'tohtml',
+        'tutor',
+      },
     },
   },
 })
