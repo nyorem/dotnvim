@@ -43,9 +43,14 @@ sudo apt install clangd
 pip install pyright --break-system-packages
 ```
 
-- Markdown: marksman](https://github.com/artempyanykh/marksman)
+- Markdown: [marksman](https://github.com/artempyanykh/marksman)
 ```sh
 sudo snap install marksman
+```
+
+- Bash: [bash-language-server](https://github.com/bash-lsp/bash-language-server)
+```sh
+sudo snap install bash-language-server --classic
 ```
 
 ## Formatters

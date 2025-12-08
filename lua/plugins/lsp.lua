@@ -30,6 +30,12 @@ return {
       vim.lsp.log.set_level("off")
       -- vim.lsp.log.set_level("debug") -- to turn it back on
 
+      -- bash
+      vim.lsp.config("bashls", {
+        capabilities = capabilities,
+      })
+      vim.lsp.enable({"bashls"})
+
       -- lua
       vim.lsp.config("lua_ls", {
         capabilities = capabilities,
