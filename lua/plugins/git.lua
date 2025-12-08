@@ -25,7 +25,9 @@ return {
     -- git information in buffers
     "lewis6991/gitsigns.nvim",
     config = function()
-      require('gitsigns').setup {
+      local gitsigns = require('gitsigns')
+
+      gitsigns.setup {
         signs = {
           add = { text = '+' },
           change = { text = '>' },
@@ -37,7 +39,13 @@ return {
           delay = 0,
         }
       }
-      vim.keymap.set('n', '<Leader>gB', ':Gitsigns toggle_current_line_blame<CR>', { desc = "Toggle git blame" })
+      vim.keymap.set('n', '<Leader>gB', gitsigns.toggle_current_line_blame, { desc = "Toggle git blame" })
+
+      vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { desc = "Stage hunk" })
+      vim.keymap.set('v', '<Leader>gs', function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = "Stage lines" })
+
+      vim.keymap.set('n', '<leader>gS', gitsigns.reset_hunk, { desc = "Reset hunk" })
+      vim.keymap.set('v', '<Leader>gS', function() gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = "Reset lines" })
     end,
   },
   {
@@ -109,7 +117,19 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       require("git-conflict").setup({})
 
-      vim.keymap.set("n", "<Leader>gr", ":Gwrite<CR>", { desc = "Mark conflicts as resolved" })
+      vim.keymap.set("n", "<Leader>gw", ":Gwrite<CR>", { desc = "Mark conflicts as resolved" })
     end,
-  }
+  },
+  {
+    "afonsofrancof/worktrees.nvim",
+    event = "VeryLazy",
+    opts = {
+      base_path = ".",
+      mappings = {
+        create = "<leader>wa",
+        delete = "<leader>wr",
+        switch = "<leader>ww",
+      },
+    },
+  },
 }

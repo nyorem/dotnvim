@@ -32,6 +32,7 @@ return {
       { "<Leader>s", group = "Search & Sessions" },
       { "<Leader>t", group = "Terminal & Testing" },
       { "<Leader>u", group = "Utilities" },
+      { "<Leader>w", group = "Worktrees" },
     })
   end,
 }
