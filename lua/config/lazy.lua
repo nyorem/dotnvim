@@ -19,6 +19,7 @@ require("config.base")
 require("config.autocmds")
 require("config.filetype")
 require("config.wsl")
+require("config.marks")
 
 -- Setup lazy.nvim
 require("lazy").setup({
