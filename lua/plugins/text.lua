@@ -22,7 +22,7 @@ return {
       vim.keymap.set("n", "<m-p>", "<Plug>(YankyPreviousEntry)")
       vim.keymap.set("n", "<m-n>", "<Plug>(YankyNextEntry)")
 
-      vim.keymap.set('n', '<Leader>y', ":Telescope yank_history<CR>", { noremap = true, desc = "Yank Ring" })
+      vim.keymap.set('n', '<Leader>yr', ":Telescope yank_history<CR>", { noremap = true, desc = "Yank Ring" })
     end
   },
   {
@@ -30,6 +30,7 @@ return {
     "SUSTech-data/wildfire.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    enabled = false,
     config = function()
       require("wildfire").setup()
     end,
@@ -79,5 +80,13 @@ return {
     "SCJangra/table-nvim",
     ft = "markdown",
     opts = {},
-  }
+  },
+  {
+    "ywpkwon/yank-path.nvim",
+    config = function()
+      require("yank-path").setup()
+
+      vim.keymap.set("n", "<Leader>yy", "<CMD>YankPath<CR>", { desc = "Yank full path of current file" })
+    end,
+  },
 }

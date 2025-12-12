@@ -6,6 +6,7 @@ return {
   {
     -- toggleable terminal window
     'akinsho/toggleterm.nvim',
+    enabled = true,
     config = function()
       require("toggleterm").setup {
         size = function(term)
@@ -20,5 +21,5 @@ return {
       }
       vim.keymap.set('n', '<Leader>to', ":ToggleTerm direction=vertical<CR>", { desc = "Open a terminal on the side" })
     end,
-  }
+  },
 }
