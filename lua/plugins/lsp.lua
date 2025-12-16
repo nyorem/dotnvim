@@ -67,7 +67,7 @@ return {
       vim.lsp.enable({"marksman"})
 
       -- key mappings
-      vim.keymap.set("n", "<Leader>cs", ":ClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
+      vim.keymap.set("n", "<Leader>cs", "<cmd>LspClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
       vim.keymap.set("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Run code action" })
       vim.keymap.set("n", "<Leader>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
       vim.keymap.set("n", "<Leader>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find all references" })
