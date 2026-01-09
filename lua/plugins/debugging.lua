@@ -3,15 +3,11 @@ return {
     -- debug your code
     "mfussenegger/nvim-dap",
     dependencies = {
-        "rcarriga/nvim-dap-ui",
-        "nvim-neotest/nvim-nio",
         "mfussenegger/nvim-dap-python",
+        "igorlfs/nvim-dap-view",
     },
     config = function()
       local dap = require('dap')
-      local dapui = require("dapui")
-
-      dapui.setup()
 
       dap.adapters.cppdbg = {
         id = 'cppdbg',
@@ -25,7 +21,10 @@ return {
           type = "cppdbg",
           request = "launch",
           program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/build/', 'file')
+          end,
+          args = function()
+            return { vim.fn.input('Arguments: ', '--gtest_filter=*') }
           end,
           cwd = '${workspaceFolder}',
           setupCommands = {
@@ -45,7 +44,7 @@ return {
           miDebuggerPath = '/usr/bin/gdb',
           cwd = '${workspaceFolder}',
           program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/build/', 'file')
           end,
           setupCommands = {
             {
@@ -60,32 +59,18 @@ return {
       require("dap-python").setup("python3")
 
       dap.configurations.c = dap.configurations.cpp
-      dap.configurations.rust = dap.configurations.cpp
-      dap.configurations.oil = dap.configurations.cpp
 
-      vim.keymap.set('n', '<Leader>dd', function() require('dap').continue() end, { desc = "Start/Resume debugging session" })
+      vim.keymap.set('n', '<Leader>dd', "<CMD>DapViewToggle<CR>", { desc = "Open Dap View" })
+      vim.keymap.set('n', '<Leader>dw', "<CMD>DapViewWatch<CR>", { desc = "Watch current variable" })
+      vim.keymap.set('n', '<Leader>dc', function() require('dap').continue() end, { desc = "Start/Resume debugging session" })
       vim.keymap.set('n', '<Leader>de', function()
         dap.terminate()
         dap.close()
-        dapui.close()
       end, { desc = "Stop debugging session" })
       vim.keymap.set('n', '<Leader>dl', function() require('dap').step_into() end, { desc = "Step into" })
       vim.keymap.set('n', '<Leader>dh', function() require('dap').step_out() end, { desc = "Step out" })
       vim.keymap.set('n', '<Leader>dj', function() require('dap').step_over() end, { desc = "Step over" })
       vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = "Toggle breakpoint" })
-
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
     end,
   }
 }

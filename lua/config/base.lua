@@ -157,6 +157,9 @@ vim.keymap.set("c", "w:", "w")
 vim.keymap.set("c", "ww", "w")
 vim.keymap.set("c", "qw", "wq")
 
+-- Select previously pasted text
+vim.keymap.set("n", "gV", "`[v`]")
+
 -- Exit terminal mode with <Esc><Esc>
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 

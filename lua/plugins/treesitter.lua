@@ -1,6 +1,8 @@
 return {
   -- context aware syntax highlighting
   "nvim-treesitter/nvim-treesitter",
+  branch = "master",
+  pin = true,
   build = ":TSUpdate",
   config = function()
     require('nvim-treesitter.configs').setup {

@@ -5,7 +5,7 @@ return {
     "MunifTanjim/nui.nvim",
   },
   event = "VeryLazy",
-  enabled = true,
+  enabled = false, -- disabled because it breaks macros
   opts = {
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

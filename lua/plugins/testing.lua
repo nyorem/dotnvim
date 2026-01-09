@@ -67,7 +67,8 @@ return
         adapters = {
           require("neotest-ctest").setup({
             is_test_file = function(file)
-              return string.match(file, "Test.+cpp") or string.match(file, "test_.+cpp")
+              local basename = vim.fs.basename(file)
+              return string.match(basename, "Test.+cpp") ~= nil or string.match(basename, "test_.+cpp") ~= nil
             end,
           })
         }
