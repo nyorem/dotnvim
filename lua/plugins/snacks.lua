@@ -6,6 +6,9 @@ return {
   opts = {
     bigfile = { enabled = true, notify = false },
     quickfile = { enabled = true },
+    -- to grep into results:
+    -- - query -- <rg args> where <rg args> = *.lua or -ig *.lua or -g subdirector/** for example
+    -- - <c-g> to go into live mode and .lua or !.lua
     picker = {
       enabled = true,
       main = {

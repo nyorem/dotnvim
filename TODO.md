@@ -1,37 +1,28 @@
-# Basics
+# Tips and tricks
 
-- get used to
-    - ^ = go to first non blank character
-    - f/F/t/t mappings
-    - ge/gE mappings
-    - g<C-a> and g<C-x> to increment/decrement numbers by line number
-    - use <c-w> in insert mode to delete last word
-    - g* = * but with partial matches andn g#
-    - use MARKS!
+https://old.reddit.com/r/neovim/comments/1q3tnz5/10_builtin_neovim_features_youre_probably_not/
 
-# Use more the following plugins
+- use MARKS! (uppercase letters = across files)
+- '!' is an operator! (ex: !ip sort)
+- <ctrl-r> in insert/command mode to paste from registers
+- use norma in visual selection or with g
+- f/F/t/t mappings
+- _ = go to first non blank character
+- use <c-w> in insert mode to delete last word
 
-- substitute.vim:
-    get used to s mappings
+## Unix commands
 
-- telescope:
-    <Space>tk for key mappings
+- nl => add line numbers to file
+- uniq
+- sort
 
-- yanky.vim:
-    find a better <Space>y mapping?
+## Plugins
 
-# TODO
+- get used to https://github.com/esmuellert/codediff.nvim
+    - CodeDiff revision
+    - CodeDiff file revision
 
-- dap: test it and make it usable
+## Misc
 
-- google tests: make it usable
-    => see https://github.com/athanase/nvim
-
-- hydra: create hydras for dap, trouble, treewalker...
-
-# New plugins
-
-https://github.com/WizardStark/dotfiles/tree/main/home/.config/nvim
-
-- treewalker
-- overseer
+- ge/gE mappings (end of previous word)
+- g* = * but with partial matches and g#

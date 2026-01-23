@@ -19,11 +19,14 @@ return {
     require('mini.move').setup()
 
     -- new operators:
-    -- * gx to exchange text
+    -- * cx to exchange text
     -- * g= to evaluate text
     -- * gm to multiply text
     -- * gs to sort text
-    require("mini.operators").setup({replace = { prefix = '' }})
+    require("mini.operators").setup({
+      exchange = { prefix = 'cx' },
+      replace = { prefix = '' },
+    })
 
     -- split and join objects with gS
     require('mini.splitjoin').setup()

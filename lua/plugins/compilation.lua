@@ -4,28 +4,15 @@ return
     -- emacs compile mode
     -- use <C-r> to recompile
     "ej-shafran/compile-mode.nvim",
-    enabled = false,
+    enabled = true,
     config = function()
       vim.g.compile_mode = {
-        default_command = "cd $(git rev-parse --show-toplevel) && cmake --build build -j8",
-        recompile_no_fail = true,
+        bang_expansion = true, -- expand some special characters like '%'
+        recompile_no_fail = true, -- Recompile will call Compile even if it was not called before
       }
 
-      vim.keymap.set('n', '<Leader>cc', ':tab Compile<CR>', { desc = "Compile the project" })
+      vim.keymap.set("n", "<Leader>r", ":botright vertical Compile ", { desc = "Run command" })
+      vim.keymap.set("n", "<Leader>R", ":botright vertical Recompile", { desc = "Rerun last command" })
     end,
   },
-  {
-    "pohlrabi404/compile.nvim",
-    event = "VeryLazy",
-    enabled = false,
-    opts = {
-      term_win_opts = {
-        split = "right",
-        width = 0.5,
-      },
-      cmds = {
-        default = "cd $(git rev-parse --show-toplevel) && cmake --build build -j8",
-      }
-    },
-  }
 }

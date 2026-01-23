@@ -127,7 +127,7 @@ return {
       base_path = ".",
       mappings = {
         create = "<leader>wa",
-        delete = "<leader>wr",
+        delete = "<leader>wd",
         switch = "<leader>ww",
       },
     },

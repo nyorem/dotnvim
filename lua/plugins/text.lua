@@ -43,26 +43,6 @@ return {
     }
   },
   {
-    -- s = substitute
-    -- cx = exchange
-    "gbprod/substitute.nvim",
-    config = function()
-      vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
-      vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
-      vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
-      vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
-
-      require("substitute").setup({
-        on_substitute = require("yanky.integration").substitute(),
-      })
-
-      vim.keymap.set("n", "cx", require('substitute.exchange').operator, { noremap = true })
-      vim.keymap.set("n", "cxx", require('substitute.exchange').line, { noremap = true })
-      vim.keymap.set("x", "X", require('substitute.exchange').visual, { noremap = true })
-      vim.keymap.set("n", "cxc", require('substitute.exchange').cancel, { noremap = true })
-    end,
-  },
-  {
     -- better f/F/t/T movements with indicators
     "jinh0/eyeliner.nvim",
     config = function()
@@ -76,6 +56,20 @@ return {
     end,
   },
   {
+    -- Markdown table manipulation:
+    -- Go to next cell = '<TAB>'
+    -- Go to previous cell = '<S-TAB>'
+    -- Insert a row above the current row = '<A-k>'
+    -- Insert a row below the current row = '<A-j>'
+    -- Move the current row up = '<A-S-k>'
+    -- Move the current row down = '<A-S-j>'
+    -- Insert a column to the left of current column = '<A-h>'
+    -- Insert a column to the right of current column = '<A-l>'
+    -- Move the current column to the left = '<A-S-h>'
+    -- Move the current column to the right = '<A-S-l>'
+    -- Insert a new table = '<A-t>'
+    -- Insert a new table that is not surrounded by pipes = '<A-S-t>'
+    -- Delete the column under cursor = '<A-d>'
     "SCJangra/table-nvim",
     ft = "markdown",
     opts = {},
