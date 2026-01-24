@@ -126,9 +126,7 @@ return {
     opts = {
       base_path = ".",
       mappings = {
-        create = "<leader>wa",
         delete = "<leader>wd",
-        switch = "<leader>ww",
       },
     },
   },
