@@ -25,6 +25,7 @@ require("config.marks")
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "utils.snacks.pickers" },
   },
   install = {
     missing = true,
