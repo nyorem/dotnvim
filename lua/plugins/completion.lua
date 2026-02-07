@@ -19,4 +19,8 @@ return {
       vim.g.copilot_no_tab_map = true
     end,
   },
+  {
+    -- -<space>j to jump to any definition/declaration
+    "pechorin/any-jump.vim",
+  }
 }
