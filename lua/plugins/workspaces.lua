@@ -11,10 +11,33 @@ return {
             open = function() Snacks.picker.files() end,
           },
       })
-      require('telescope').load_extension('workspaces')
       vim.keymap.set('n', '<Leader>pa', '<Cmd>WorkspacesAdd<CR>', { desc = "Add current directory to workspace list" })
       vim.keymap.set('n', '<Leader>pd', '<Cmd>WorkspacesRemove<CR>', { desc = "Remove current directory from the workspace list" })
-      vim.keymap.set('n', '<Leader>pp', '<Cmd>Telescope workspaces<CR>', { desc = "List all workspaces" })
+
+      -- copied from https://github.com/folke/snacks.nvim/discussions/498#discussioncomment-11859446
+      vim.keymap.set('n', '<Leader>pp', function()
+        local items = {}
+        local longest_name = 0
+        for i, workspace in ipairs(require('workspaces').get()) do
+          table.insert(items, {
+            idx = i,
+            score = i,
+            text = workspace.path,
+            name = workspace.name,
+          })
+          longest_name = math.max(longest_name, #workspace.name)
+        end
+        longest_name = longest_name + 2
+        return Snacks.picker({
+          items = items,
+          format = "text",
+          layout = "select",
+          confirm = function(picker, item)
+            picker:close()
+            vim.cmd(('WorkspacesOpen %s'):format(item.name))
+          end,
+        })
+      end, { desc = "Pick project" })
     end,
   },
   {
