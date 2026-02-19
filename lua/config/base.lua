@@ -163,6 +163,12 @@ vim.keymap.set("n", "gV", "`[v`]")
 -- Exit terminal mode with <Esc><Esc>
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 
+-- Switch between terminal and other buffers with Alt+Left/Right
+vim.keymap.set("t", "<M-Left>", "<C-\\><C-n><C-w>h")
+vim.keymap.set("t", "<M-Right>", "<C-\\><C-n><C-w>l")
+vim.keymap.set("n", "<M-Left>", "<C-w>h")
+vim.keymap.set("n", "<M-Right>", "<C-w>l")
+
 -- Search within visual selection - this is magic
 -- https://old.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/mo9nalp/
 vim.keymap.set("x", "/", "<Esc>/\\%V") 
