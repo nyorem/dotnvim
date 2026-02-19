@@ -44,15 +44,9 @@ return {
   },
   {
     -- better f/F/t/T movements with indicators
-    "jinh0/eyeliner.nvim",
-    config = function()
-      require("eyeliner").setup({
-        highlight_on_key = true,
-        dim = true,
-        disabled_filetypes = {
-          "NeogitStatus",
-        },
-      })
+    "unblevable/quick-scope",
+    init = function()
+      vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
     end,
   },
   {
