@@ -2,7 +2,7 @@ return {
   {
     -- lightning fast completion
     'saghen/blink.cmp',
-    version = 'v1.5.0',
+    version = 'v1.9.1',
     opts = {
       keymap = { preset = 'super-tab' },
     },
