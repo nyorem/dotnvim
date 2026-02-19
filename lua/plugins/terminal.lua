@@ -17,9 +17,20 @@ return {
           end
         end,
         shade_terminals = false,
+        start_on_insert = false,
         -- autochdir = true,
       }
       vim.keymap.set('n', '<Leader>to', ":ToggleTerm direction=vertical<CR>", { desc = "Open a terminal on the side" })
+
+      -- automatically go into insert mode when entering a terminal buffer
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "term://*toggleterm#*",
+        callback = function()
+          vim.schedule(function()
+            vim.cmd("startinsert")
+          end)
+        end,
+      })
     end,
   },
 }
