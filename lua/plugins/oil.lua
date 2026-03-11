@@ -73,5 +73,21 @@ return {
         vim.keymap.set("n", "<ESC>", "c", { buffer = params.buf, remap = true, nowait = true })
       end,
     })
+
+    -- remember the last directory opened in oil and provide a mapping to go back to it
+    -- https://github.com/stevearc/oil.nvim/issues/437#issuecomment-2207801331
+    local last = nil
+    vim.api.nvim_create_autocmd("BufEnter", {
+      pattern = "oil://*",
+      callback = function(args) last = require("oil").get_current_dir() end,
+    })
+
+    vim.keymap.set("n", "<leader>-", function()
+      if last then
+        require("oil").open(last)
+      else
+        vim.notify("No previous directory to open", vim.log.levels.WARN)
+      end
+    end)
   end,
 }

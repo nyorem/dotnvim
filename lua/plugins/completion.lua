@@ -20,7 +20,15 @@ return {
     end,
   },
   {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    opts = {},
+  },
+  {
     -- -<space>j to jump to any definition/declaration
     "pechorin/any-jump.vim",
-  }
+  },
 }

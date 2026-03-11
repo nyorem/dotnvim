@@ -61,10 +61,10 @@ return {
       vim.lsp.enable({"pyright"})
 
       -- markdown
-      vim.lsp.config("marksman", {
-        capabilities = capabilities,
-      })
-      vim.lsp.enable({"marksman"})
+      -- vim.lsp.config("marksman", {
+      --   capabilities = capabilities,
+      -- })
+      -- vim.lsp.enable({"marksman"})
 
       -- key mappings
       vim.keymap.set("n", "<Leader>cs", "<cmd>LspClangdSwitchSourceHeader<CR>", { desc = "Switch between header and source file" })
