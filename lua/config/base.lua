@@ -124,9 +124,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Tab motions
-vim.keymap.set("n", "te", ":tabedit")
-vim.keymap.set("n", "<tab>", ":tabnext<CR>")
-vim.keymap.set("n", "<s-tab>", ":tabprev<CR>")
+vim.keymap.set("n", "te", ":tabnew")
 
 -- Restore ','
 vim.keymap.set("n", ",,", ",")
@@ -185,3 +183,28 @@ vim.keymap.set("n", "J", "mzJ`z:delmarks z<cr>")
 -- https://old.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/moelhto/
 vim.keymap.set('x', 'I', function() return vim.fn.mode() == 'V' and '^<C-v>I' or 'I' end, { expr = true })
 vim.keymap.set('x', 'A', function() return vim.fn.mode() == 'V' and '$<C-v>A' or 'A' end, { expr = true })
+
+vim.o.cmdheight = 0
+require('vim._core.ui2').enable({
+  enable = true, -- Whether to enable or disable the UI.
+  msg = { -- Options related to the message module.
+    ---@type 'cmd'|'msg' Default message target, either in the
+    ---cmdline or in a separate ephemeral message window.
+    ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+    ---or table mapping |ui-messages| kinds and triggers to a target.
+    targets = 'cmd',
+    cmd = { -- Options related to messages in the cmdline window.
+      height = 0.5 -- Maximum height while expanded for messages beyond 'cmdheight'.
+    },
+    dialog = { -- Options related to dialog window.
+      height = 0.5, -- Maximum height.
+    },
+    msg = { -- Options related to msg window.
+      height = 0.5, -- Maximum height.
+      timeout = 4000, -- Time a message is visible in the message window.
+    },
+    pager = { -- Options related to message window.
+      height = 1, -- Maximum height.
+    },
+  },
+})

@@ -29,7 +29,7 @@ return {
     -- incremental selection with <CR>
     "SUSTech-data/wildfire.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "romus204/tree-sitter-manager.nvim" },
     config = function()
       require("wildfire").setup()
     end,
@@ -39,7 +39,7 @@ return {
     "wurli/contextindent.nvim",
     opts = { pattern = "*.md" },
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
+      "romus204/tree-sitter-manager.nvim",
     }
   },
   {

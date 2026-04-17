@@ -5,12 +5,13 @@
 Neovim:
 
 ```sh
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install neovim
-
-python3 -m pip install --user --upgrade pynvim
+git clone https://github.com/neovim/neovim
+cd neovim
+make CMAKE_BUILD_TYPE=Release -j8
+sudo make install
 ```
+
+Treesitter: download and install latest release from https://github.com/tree-sitter/tree-sitter/releases/ (binary should be named `tree-sitter`)
 
 git:
 ```sh
