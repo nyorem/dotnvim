@@ -22,7 +22,7 @@ return
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      "romus204/tree-sitter-manager.nvim",
       -- adapters below
       "orjangj/neotest-ctest",
     },
