@@ -13,15 +13,6 @@ return {
     -- keymaps
     vim.keymap.set('n', '<Leader>sd', function() Snacks.picker.grep() end, { desc = "Grep inside current directory" })
 
-    vim.keymap.set('n', '<Leader>sp', function()
-      local root = string.gsub(vim.fn.system("git rev-parse --show-toplevel"), "\n", "")
-      if vim.v.shell_error == 0 then
-        Snacks.picker.git_grep()
-      else
-        Snacks.picker.grep()
-      end
-    end, { desc = "Grep inside whole git repository" })
-
     vim.keymap.set('n', '<Leader>fn', function()
       Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
     end, { desc = "Search inside neovim configuration" })

@@ -43,6 +43,7 @@ return {
   {
     -- manage your sessions
     "natecraddock/sessions.nvim",
+    enabled = false,
     config = function()
       require("sessions").setup({
           session_filepath = vim.fn.stdpath("data") .. "/sessions",

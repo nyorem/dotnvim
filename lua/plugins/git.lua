@@ -100,6 +100,7 @@ return {
   {
     -- git log integration in vim
     "junegunn/gv.vim",
+    enabled = false,
     dependencies = {
       "tpope/vim-fugitive",
     },
@@ -131,8 +132,30 @@ return {
     },
   },
   {
+    -- Explorer key bindings:
+    -- za = toggle fold under cursor 
+    -- zA = toggle all folds under cursor
+    -- zM = close all folds
+    -- zR = open all folds
+    -- t switches from inline to side by side diff
+    -- i switches from tree to list view
+    --
+    -- Common use cases:
+    -- * git diff: CodeDiff <branchA> <branchB>
+    -- * PR-like diff: CodeDiff <branchA>...<branchB>
+    -- * file comparison: CodeDiff file a b
+    -- * directory comparison: CodeDiff dir a b
+    -- * file history: CodeDiff history HEAD~10 %
     "esmuellert/codediff.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = "CodeDiff",
+    opts = {
+      diff = {
+        layout = "inline",
+      },
+      explorer = {
+        view_mode = "tree",
+      },
+    },
   },
 }

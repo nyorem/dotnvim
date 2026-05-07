@@ -1,6 +1,6 @@
 return {
   -- netrw of the future
-  'stevearc/oil.nvim',
+  'barrettruth/canola.nvim',
   config = function()
     -- Declare a global function to retrieve the current directory
     function _G.get_oil_winbar()
