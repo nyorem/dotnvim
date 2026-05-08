@@ -12,6 +12,11 @@ return {
     "tpope/vim-sleuth",
   },
   {
+    -- :S(subvert) to replace all occurrences of a word under the cursor, respecting case
+    -- change case with cr: s = snake_case, m = MixedCase, c = camelCase, u = UPPER_CASE, - = dash-case, . = dot.case
+    "tpope/vim-abolish",
+  },
+  {
     -- handy brackets mappings
     -- '=p' => smarter paste command that preserves indentation
     "tpope/vim-unimpaired",
