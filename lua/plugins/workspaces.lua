@@ -8,7 +8,7 @@ return {
           mru_sort = false,
           cd_type = "local",
           hooks = {
-            open = function() Snacks.picker.files() end,
+            open = function() Snacks.picker.git_files() end,
           },
       })
       vim.keymap.set('n', '<Leader>pa', '<Cmd>WorkspacesAdd<CR>', { desc = "Add current directory to workspace list" })
