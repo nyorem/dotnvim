@@ -119,5 +119,23 @@ return {
     config = function()
       require("trouble").setup({})
     end
-  }
+  },
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("lint").linters_by_ft = {
+        bitbake = { "oelint-adv" },
+        sh = { "shellcheck" },
+      }
+
+      vim.keymap.set("n", "<F7>", function()
+        require("lint").try_lint()
+      end)
+    end,
+  },
+  {
+    "mrcjkb/haskell-tools.nvim",
+    version = "^7",
+    lazy = false,
+  },
 }

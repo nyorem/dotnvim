@@ -80,6 +80,13 @@ pip install ruff --break-system-packages
 sudo apt install python3-debugpy
 ```
 
+## Linters
+
+- Bitbake: [oelint-adv](https://github.com/priv-kweihmann/oelint-adv)
+```sh
+pip install oelint-adv --break-system-packages
+```
+
 ## References
 
 You can checkout the [vim-plug](https://github.com/nyorem/dotnvim/tree/vim-plug) branch to see my old configuration before I switched to [lazy.nvim](https://github.com/folke/lazy.nvim).

@@ -72,6 +72,7 @@ return {
   },
   {
     -- when you need one more git helper
+    -- <range>Gclog = commit history for selection (use 0 for whole file)
     "tpope/vim-fugitive",
     config = function()
       vim.keymap.set("n", "<Leader>gl", ":tab Git log<CR>", { desc = "Git log" })
