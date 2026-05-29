@@ -16,8 +16,12 @@ return {
         process_spinner = false,
       }
       vim.keymap.set('n', '<Leader>gg', function()
-        local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
-        require("neogit").open({ cwd = cwd_without_oil })
+        if vim.bo.filetype == "oil" then
+          local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
+          require("neogit").open({ cwd = cwd_without_oil })
+        else
+          require("neogit").open()
+        end
       end, { desc = "Git status" })
     end,
   },
@@ -51,6 +55,7 @@ return {
   {
     -- github integration
     "pwntester/octo.nvim",
+    enabled = false,
     config = function()
       require("octo").setup({
           enable_builtin = true,

@@ -7,10 +7,12 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
   },
   config = function()
-    -- options
     require('telescope').setup()
 
-    -- keymaps
+    vim.keymap.set('n', '<Leader>sp', function()
+        Snacks.picker.git_grep()
+    end, { desc = "Grep inside whole git repository" })
+
     vim.keymap.set('n', '<Leader>sd', function() Snacks.picker.grep() end, { desc = "Grep inside current directory" })
 
     vim.keymap.set('n', '<Leader>fn', function()

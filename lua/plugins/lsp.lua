@@ -51,6 +51,7 @@ return {
           "--malloc-trim",
         },
         capabilities = capabilities,
+        filetypes = { "c", "cpp", "objc", "objcpp" },
       })
       vim.lsp.enable({"clangd"})
 
@@ -132,10 +133,5 @@ return {
         require("lint").try_lint()
       end)
     end,
-  },
-  {
-    "mrcjkb/haskell-tools.nvim",
-    version = "^7",
-    lazy = false,
-  },
+  }
 }

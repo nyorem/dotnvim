@@ -184,6 +184,18 @@ vim.keymap.set("n", "J", "mzJ`z:delmarks z<cr>")
 vim.keymap.set('x', 'I', function() return vim.fn.mode() == 'V' and '^<C-v>I' or 'I' end, { expr = true })
 vim.keymap.set('x', 'A', function() return vim.fn.mode() == 'V' and '$<C-v>A' or 'A' end, { expr = true })
 
+-- Change current working directory to the one of the current file
+vim.keymap.set("n", "<leader>ud", function()
+    local dir
+    if vim.bo.filetype == "oil" then
+        dir = require("oil").get_current_dir()
+    else
+        dir = vim.fn.expand('%:p:h')
+    end
+    vim.cmd.lcd(dir)
+    vim.notify("Changed working directory to " .. dir)
+end, { desc = "Update current working directory" })
+
 vim.o.cmdheight = 0
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.
