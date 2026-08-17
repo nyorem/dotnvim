@@ -6,5 +6,5 @@ return {
   {
     -- syntax highlighting for robot files
     "mfukar/robotframework-vim"
-  }
+  },
 }

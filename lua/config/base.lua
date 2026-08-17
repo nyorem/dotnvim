@@ -99,7 +99,7 @@ else
 end
 
 -- {{{1 MAPPINGS
--- Use arrows for tab switching
+-- Use ctrl+arrows for tab switching
 vim.keymap.set("n", "<C-Left>", "gT")
 vim.keymap.set("n", "<C-Right>", "gt")
 
@@ -122,9 +122,6 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
-
--- Tab motions
-vim.keymap.set("n", "te", ":tabnew")
 
 -- Restore ','
 vim.keymap.set("n", ",,", ",")
@@ -186,17 +183,17 @@ vim.keymap.set('x', 'A', function() return vim.fn.mode() == 'V' and '$<C-v>A' or
 
 -- Change current working directory to the one of the current file
 vim.keymap.set("n", "<leader>ud", function()
-    local dir
-    if vim.bo.filetype == "oil" then
-        dir = require("oil").get_current_dir()
-    else
-        dir = vim.fn.expand('%:p:h')
-    end
-    vim.cmd.lcd(dir)
+    local dir = require("utils.toolbox").get_current_dir()
     vim.notify("Changed working directory to " .. dir)
 end, { desc = "Update current working directory" })
 
-vim.o.cmdheight = 0
+-- Replace tabs with spaces
+vim.keymap.set("n", "<leader>ut", function()
+    vim.bo.expandtab = true
+    vim.cmd("retab")
+    vim.bo.expandtab = false
+end, { desc = "Replace tabs with spaces" })
+
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.
   msg = { -- Options related to the message module.

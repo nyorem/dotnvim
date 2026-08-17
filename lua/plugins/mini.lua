@@ -7,7 +7,15 @@ return {
     statusline.setup({ use_icons = false })
 
     -- enhance some text objects (an = around next, al = around last...)
-    require('mini.ai').setup()
+    local ai = require('mini.ai')
+    ai.setup({
+      custom_textobjects = {
+        -- treesitter-based function/class text objects:
+        -- aF/iF = around/inside function, aC/iC = around/inside class
+        F = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+        C = ai.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
+      },
+    })
 
     -- nerd icons
     require('mini.icons').setup({ style = "glyph" })

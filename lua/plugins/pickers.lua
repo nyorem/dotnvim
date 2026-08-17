@@ -8,12 +8,21 @@ return {
   },
   config = function()
     require('telescope').setup()
+    local toolbox = require("utils.toolbox")
 
     vim.keymap.set('n', '<Leader>sp', function()
-        Snacks.picker.git_grep()
-    end, { desc = "Grep inside whole git repository" })
+      local dir = toolbox.get_current_dir()
+      local root = vim.fn.systemlist({ "git", "-C", dir, "rev-parse", "--show-toplevel" })[1]
+      if vim.v.shell_error == 0 and root and root ~= "" then
+        Snacks.picker.git_grep({ cwd = root })
+      else
+        Snacks.picker.grep({ cwd = dir })
+      end
+    end, { desc = "Grep inside whole git repository of current file" })
 
-    vim.keymap.set('n', '<Leader>sd', function() Snacks.picker.grep() end, { desc = "Grep inside current directory" })
+    vim.keymap.set('n', '<Leader>sd', function()
+      Snacks.picker.grep({ cwd = toolbox.get_current_dir() })
+    end, { desc = "Grep inside current file's directory" })
 
     vim.keymap.set('n', '<Leader>fn', function()
       Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
@@ -26,13 +35,14 @@ return {
     vim.keymap.set('n', '<Leader><Leader>', function() Snacks.picker.files() end, { desc = "Find a file" })
 
     vim.keymap.set('n', '<C-p>', function()
-      vim.fn.system("git rev-parse --show-toplevel")
-      if vim.v.shell_error == 0 then
-        Snacks.picker.git_files()
+      local dir = toolbox.get_current_dir()
+      local root = vim.fn.systemlist({ "git", "-C", dir, "rev-parse", "--show-toplevel" })[1]
+      if vim.v.shell_error == 0 and root and root ~= "" then
+        Snacks.picker.git_files({ cwd = root })
       else
-        Snacks.picker.files()
+        Snacks.picker.files({ cwd = dir })
       end
-    end, { desc = "Find a file in git repository" })
+    end, { desc = "Find a file in git repository of current file" })
 
     vim.keymap.set('n', '<Leader>fr', function() Snacks.picker.recent() end, { desc = "List all recent files" })
 

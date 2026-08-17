@@ -6,6 +6,10 @@ return {
   {
     -- yank ring
     "gbprod/yanky.nvim",
+    enabled = false,
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
     config = function()
       require("yanky").setup({
         ring = {
@@ -75,5 +79,13 @@ return {
 
       vim.keymap.set("n", "<Leader>yy", "<CMD>YankPath<CR>", { desc = "Yank full path of current file" })
     end,
+  },
+  {
+    "SunnyTamang/select-undo.nvim",
+    opts = {
+      line_mapping = "zu",     -- Step undo mapping (frees gu for lowercasing)
+      sweep_mapping = "zU",    -- Sweep undo mapping (frees gU for uppercasing)
+      partial_mapping = "zcu", -- Partial undo mapping
+    },
   },
 }

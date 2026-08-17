@@ -15,16 +15,22 @@ return {
     -- :S(subvert) to replace all occurrences of a word under the cursor, respecting case
     -- change case with cr: s = snake_case, m = MixedCase, c = camelCase, u = UPPER_CASE, - = dash-case, . = dot.case
     "tpope/vim-abolish",
+    enabled = false,
   },
   {
     -- handy brackets mappings
-    -- '=p' => smarter paste command that preserves indentation
     "tpope/vim-unimpaired",
     config = function()
       -- '(' and ')' are more accessible on an AZERTY layout
       vim.keymap.set({"n", "o", "x"}, "(", "[", { remap = true })
       vim.keymap.set({"n", "o", "x"}, ")", "]", { remap = true })
     end,
+  },
+  {
+    -- smarter paste that preserves indentation
+    'nemanjamalesija/smart-paste.nvim',
+    event = 'VeryLazy',
+    config = true,
   },
   {
     -- disable search highlighting when you are done with searching
@@ -39,6 +45,7 @@ return {
   },
   {
     "jake-stewart/multicursor.nvim",
+    enabled = false,
     branch = "1.0",
     opts = {},
     config = function()
@@ -60,6 +67,9 @@ return {
       set({"n", "x"}, "<leader>S", function() mc.matchSkipCursor(-1) end, { desc = "Skip match and go to previous" })
       set({"n", "x"}, "<leader>A", mc.matchAllAddCursors, { desc = "Add cursor to all matches" })
 
+      -- match new cursors within visual selections by regex.
+      set("x", "M", mc.matchCursors, { desc = "Add cursors matching a pattern in selection" })
+
       -- Add a cursor and jump to the next/previous search result.
       set("n", "<leader>/n", function() mc.searchAddCursor(1) end, { desc = "Add cursor to next search result" })
       set("n", "<leader>/N", function() mc.searchAddCursor(-1) end, { desc = "Add cursor to previous search result" })
@@ -73,6 +83,15 @@ return {
 
       -- Disable and enable cursors.
       set({"n", "x"}, "<c-q>", mc.toggleCursor, { desc = "Toggle cursors" })
+
+      -- Pressing `gaip` will add a cursor on each line of a paragraph.
+      -- Can also be used to add cursor for each line of visual selection.
+      set({"n", "x"}, "ga", mc.addCursorOperator, { desc = "Add cursor operator" })
+
+      -- Pressing `<leader>miwap` will create a cursor in every match of the
+      -- string captured by `iw` inside range `ap`.
+      -- This action is highly customizable, see `:h multicursor-operator`.
+      -- set({"n", "x"}, "<leader>m", mc.operator)
 
       -- Mappings defined in a keymap layer only apply when there are
       -- multiple cursors. This lets you have overlapping mappings.

@@ -3,10 +3,7 @@ return {
     -- magit like plugin
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      -- "nvim-telescope/telescope.nvim", -- optional
-      -- "ibhagwan/fzf-lua",              -- optional
-      -- "echasnovski/mini.pick",         -- optional
+      "nvim-lua/plenary.nvim",
     },
     config = function()
       local neogit = require("neogit")
@@ -16,6 +13,9 @@ return {
         process_spinner = false,
       }
       vim.keymap.set('n', '<Leader>gg', function()
+        local dir = require("utils.toolbox").get_current_dir()
+        vim.cmd.lcd(dir)
+
         if vim.bo.filetype == "oil" then
           local cwd_without_oil = string.gsub(vim.fn.expand("%:p:h"), "oil://", "")
           require("neogit").open({ cwd = cwd_without_oil })
@@ -53,27 +53,40 @@ return {
     end,
   },
   {
-    -- github integration
-    "pwntester/octo.nvim",
-    enabled = false,
-    config = function()
-      require("octo").setup({
-          enable_builtin = true,
-          suppress_missing_scope = {
-            projects_v2 = true,
+    "emrearmagan/atlas.nvim",
+    dependencies = {
+      "MeanderingProgrammer/render-markdown.nvim",
+      "esmuellert/codediff.nvim",
+    },
+    opts = {
+      pulls = {
+        diff = {
+          open_cmd = "CodeDiff",
+        },
+        repo_config = {
+          paths = {
+            ["etn-electrical/*"] = "/home/eaton/dev/eaton/*"
           },
-          file_panel = {
-            use_icons = false,
+        },
+        providers = {
+          github = {},
+        },
+      },
+      issues = {
+        providers = {
+          jira = {
+            base_url = os.getenv("JIRA_BASE_URL"),
+            email = os.getenv("JIRA_EMAIL"),
+            token = os.getenv("JIRA_TOKEN"),
           },
-      })
-
-      vim.keymap.set('n', '<Leader>go', '<CMD>Octo<CR>', { desc = "Open Octo dashboard" })
-      vim.keymap.set('n', '<Leader>gpc', ':Octo search is:pr archived:false author:@me is:open<CR>', { desc = "List all the PRs I created" })
-      vim.keymap.set('n', '<Leader>gpa', ':Octo search is:pr archived:false assignee:@me is:open<CR>', { desc = "List all the PRs assigned to me" })
-      vim.keymap.set('n', '<Leader>gpm', ':Octo search is:pr archived:false mentions:@me is:open<CR>', { desc = "List all the PRs where I am mentioned" })
-      vim.keymap.set('n', '<Leader>gpr', ':Octo search is:pr archived:false review-requested:@me is:open<CR>', { desc = "List all the PRs where I am requested to review" })
-      vim.keymap.set('n', '<Leader>gpc', ':Octo pr create<CR>', { desc = "Create a PR" })
-    end,
+        },
+      },
+    },
+    keys = {
+      { '<Leader>gi', '<CMD>AtlasIssues<CR>', desc = "List all the issues I'm involved in" },
+      { '<Leader>gp', '<CMD>AtlasPulls<CR>', desc = "List all the PRs I'm involved in" },
+      { '<Leader>gP', '<CMD>AtlasCreatePR<CR>', desc = "Create a PR" },
+    },
   },
   {
     -- when you need one more git helper

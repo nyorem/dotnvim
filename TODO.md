@@ -5,10 +5,11 @@ https://old.reddit.com/r/neovim/comments/1q3tnz5/10_builtin_neovim_features_your
 - use MARKS! (uppercase letters = across files)
 - '!' is an operator! (ex: !ip sort)
 - <ctrl-r> in insert/command mode to paste from registers
-- use norma in visual selection or with g
+- use norm in visual selection or with g
 - f/F/t/t mappings
 - _ = go to first non blank character
 - use <c-w> in insert mode to delete last word
+- use ycc (duplicate line and comment the first)
 
 ## Unix commands
 

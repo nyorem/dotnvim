@@ -88,6 +88,6 @@ return {
       else
         vim.notify("No previous directory to open", vim.log.levels.WARN)
       end
-    end)
+    end, { desc = "Reopen last directory" })
   end,
 }

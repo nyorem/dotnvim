@@ -13,7 +13,7 @@ return
         if vim.bo.filetype == "cpp" or vim.bo.filetype == "c" or vim.bo.filetype == "oil" then
           require("ctest-telescope").run_test()
         end
-      end, { desc = "Run test" })
+      end, { desc = "Run test (telescope)" })
     end,
   },
   {

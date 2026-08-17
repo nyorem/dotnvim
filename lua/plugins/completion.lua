@@ -2,7 +2,7 @@ return {
   {
     -- lightning fast completion
     'saghen/blink.cmp',
-    version = 'v1.9.1',
+    version = 'v1.10.2',
     opts = {
       keymap = { preset = 'super-tab' },
     },
@@ -18,15 +18,6 @@ return {
       })
       vim.g.copilot_no_tab_map = true
     end,
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
-    dependencies = {
-      { "nvim-lua/plenary.nvim", branch = "master" },
-    },
-    build = "make tiktoken",
-    opts = {},
   },
   {
     -- -<space>j to jump to any definition/declaration

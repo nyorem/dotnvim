@@ -33,7 +33,6 @@ sudo apt install cmake shellcheck
 NERD font: https://www.nerdfonts.com/font-downloads
 - Windows: Caskaydia Cove Nerd Font
 
-
 ## LSPs
 
 - C/C++: [clangd](https://clangd.llvm.org/)
