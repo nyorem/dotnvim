@@ -57,17 +57,17 @@ return {
     -- Markdown table manipulation:
     -- Go to next cell = '<TAB>'
     -- Go to previous cell = '<S-TAB>'
-    -- Insert a row above the current row = '<A-k>'
-    -- Insert a row below the current row = '<A-j>'
-    -- Move the current row up = '<A-S-k>'
-    -- Move the current row down = '<A-S-j>'
-    -- Insert a column to the left of current column = '<A-h>'
-    -- Insert a column to the right of current column = '<A-l>'
-    -- Move the current column to the left = '<A-S-h>'
-    -- Move the current column to the right = '<A-S-l>'
-    -- Insert a new table = '<A-t>'
-    -- Insert a new table that is not surrounded by pipes = '<A-S-t>'
-    -- Delete the column under cursor = '<A-d>'
+    -- Insert a row above the current row = '<M-k>'
+    -- Insert a row below the current row = '<M-j>'
+    -- Move the current row up = '<M-S-k>'
+    -- Move the current row down = '<M-S-j>'
+    -- Insert a column to the left of current column = '<M-h>'
+    -- Insert a column to the right of current column = '<M-l>'
+    -- Move the current column to the left = '<M-S-h>'
+    -- Move the current column to the right = '<M-S-l>'
+    -- Insert a new table = '<M-t>'
+    -- Insert a new table that is not surrounded by pipes = '<M-S-t>'
+    -- Delete the column under cursor = '<M-d>'
     "SCJangra/table-nvim",
     ft = "markdown",
     opts = {},
@@ -87,5 +87,5 @@ return {
       sweep_mapping = "zU",    -- Sweep undo mapping (frees gU for uppercasing)
       partial_mapping = "zcu", -- Partial undo mapping
     },
-  },
+  }
 }

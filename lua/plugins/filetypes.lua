@@ -7,4 +7,8 @@ return {
     -- syntax highlighting for robot files
     "mfukar/robotframework-vim"
   },
+  {
+    -- syntax highlighting for jai files
+    "rluba/jai.vim",
+  },
 }
