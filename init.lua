@@ -541,7 +541,7 @@ require("oil").setup({
     -- change cwd when changing directory from oil
     -- https://github.com/stevearc/oil.nvim/issues/68
     keymaps = {
-      ["<Esc>"] = { callback = "actions.close", mode = "n" },
+      -- ["<Esc>"] = { callback = "actions.close", mode = "n" },
       ["<C-p>"] = false,
       ["-"] = function()
         require("oil.actions").parent.callback()

@@ -13,6 +13,7 @@ vim.opt.shell = "bash" -- Default shell to use with :sh command
 vim.g.markdown_folding = 1 -- Enable header folding for Markdown files
 vim.opt.clipboard = "unnamedplus"  -- Use system clipboard
 vim.keymap.set("v", "<C-c>", "y") -- Use <C-c> to copy in visual mode
+vim.opt.autoread = true -- Automatically read files when changed outside of Vim
 
 -- Searching
 vim.opt.ignorecase = true -- Case insensitive
@@ -130,10 +131,6 @@ vim.keymap.set("n", ",,", ",")
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
 
--- Abolish Ex mode
-vim.keymap.set("n", "Q", "@q")
-vim.keymap.set("v", "Q", ":norm @q<CR>")
-
 -- Keep search matches in the middle of the window
 -- and keep the same directions no matter we used '/' or '?'
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zvzz'", { expr = true})
@@ -194,6 +191,20 @@ vim.keymap.set("n", "<leader>ut", function()
     vim.bo.expandtab = false
 end, { desc = "Replace tabs with spaces" })
 
+-- {{{2 MULTICURSORS
+vim.keymap.set("n", "<Esc>", function()
+    local mc_ns = vim.api.nvim_create_namespace("nvim.multicursor")
+    vim.api.nvim_buf_clear_namespace(0, mc_ns, 0, -1)
+end, { noremap = true, desc = "Clear all multicursors" })
+
+-- UI2
+-- maxheight = Maximum height while expanded for messages beyond 'cmdheight'.
+-- timeout = Time a message is visible in the message window.
+vim.cmd [[
+    set messagesopt += "timeout:4000,maxheight:0.5"
+]]
+
+-- {{{1 UI2
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.
   msg = { -- Options related to the message module.
@@ -202,18 +213,12 @@ require('vim._core.ui2').enable({
     ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
     ---or table mapping |ui-messages| kinds and triggers to a target.
     targets = 'cmd',
-    cmd = { -- Options related to messages in the cmdline window.
-      height = 0.5 -- Maximum height while expanded for messages beyond 'cmdheight'.
-    },
     dialog = { -- Options related to dialog window.
       height = 0.5, -- Maximum height.
-    },
-    msg = { -- Options related to msg window.
-      height = 0.5, -- Maximum height.
-      timeout = 4000, -- Time a message is visible in the message window.
     },
     pager = { -- Options related to message window.
       height = 1, -- Maximum height.
     },
   },
 })
+
