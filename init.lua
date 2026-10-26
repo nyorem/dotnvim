@@ -6,6 +6,9 @@ require("config.wsl")
 require("config.marks")
 
 -- {{{1 plugins
+-- experimental loader to make startup faster
+vim.loader.enable()
+
 -- {{{2 core
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim"
@@ -180,7 +183,6 @@ vim.pack.add({
 
   -- Jira issues and pull requests in Neovim
   "https://github.com/emrearmagan/atlas.nvim",
-  "https://github.com/MeanderingProgrammer/render-markdown.nvim",
   "https://github.com/esmuellert/codediff.nvim",
 
   -- when you need one more git helper
@@ -261,6 +263,14 @@ vim.keymap.set('v', '<Leader>gS', function() gitsigns.reset_hunk({ vim.fn.line('
 
 -- atlas
 require("atlas").setup({
+  providers = {
+    github = {},
+    jira = {
+      base_url = os.getenv("JIRA_BASE_URL"),
+      email = os.getenv("JIRA_EMAIL"),
+      token = os.getenv("JIRA_TOKEN"),
+    },
+  },
   pulls = {
     diff = {
       open_cmd = "CodeDiff",
@@ -270,24 +280,12 @@ require("atlas").setup({
         ["etn-electrical/*"] = "/home/eaton/dev/eaton/*"
       },
     },
-    providers = {
-      github = {},
-    },
-  },
-  issues = {
-    providers = {
-      jira = {
-        base_url = os.getenv("JIRA_BASE_URL"),
-        email = os.getenv("JIRA_EMAIL"),
-        token = os.getenv("JIRA_TOKEN"),
-      },
-    },
   },
 })
 
-vim.keymap.set("n", '<Leader>gi', '<CMD>AtlasIssues<CR>', { desc = "List all the issues I'm involved in" })
-vim.keymap.set("n", '<Leader>gp', '<CMD>AtlasPulls<CR>', { desc = "List all the PRs I'm involved in" })
-vim.keymap.set("n", '<Leader>gP', '<CMD>AtlasCreatePR<CR>', { desc = "Create a PR" })
+vim.keymap.set("n", '<Leader>gi', '<CMD>Atlas issues<CR>', { desc = "List all the issues I'm involved in" })
+vim.keymap.set("n", '<Leader>gp', '<CMD>Atlas pulls<CR>', { desc = "List all the PRs I'm involved in" })
+vim.keymap.set("n", '<Leader>gP', '<CMD>Atlas create pr<CR>', { desc = "Create a PR" })
 
 -- vim-fugitive
 vim.keymap.set("n", "<Leader>gl", ":tab Git log<CR>", { desc = "Git log" })
@@ -1031,7 +1029,9 @@ vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 require("table-nvim").setup({})
 
 -- yank-path
-require("yank-path").setup({})
+require("yank-path").setup({
+  default_mapping = false, -- disable default 'Y' mapping
+})
 
 vim.keymap.set("n", "<Leader>yy", "<CMD>YankPath<CR>", { desc = "Yank full path of current file" })
 

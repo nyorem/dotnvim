@@ -10,7 +10,14 @@ vim.cmd [[
 
         command! -nargs=1 Browse call OpenBrowserWsl(<f-args>)
     endif
-
-    " <ctrl-i> and <tab> are the same in terminal vim, so we need to remap it
-    nnoremap <C-n>i <C-i>
 ]]
+
+-- override vim.ui.open to use wslview if available
+if vim.fn.executable("wslview") == 1 then
+  local open = vim.ui.open
+  vim.ui.open = function(path, opts)
+    return open(path, vim.tbl_extend("keep", opts or {}, {
+      cmd = { "wslview" },
+    }))
+  end
+end
