@@ -20,9 +20,9 @@ sudo apt install git gh
 
 WSL:
 ```sh
-sudo add-apt-repository ppa:wslutilities/wslu
-sudo apt update
-sudo apt install wslu
+git clone --depth 1 --branch v4.1.3 https://github.com/wslutilities/wslu.git /tmp/wslu
+cd /tmp/wslu && make && sudo make install
+rm -rf /tmp/wslu
 ```
 
 other stuff:
