@@ -9,7 +9,7 @@
       "src": "https://github.com/pechorin/any-jump.vim"
     },
     "atlas.nvim": {
-      "rev": "184e891e19d989deb93f890fa20f4ec3dcb89ef2",
+      "rev": "07b019b8c31a0ec9b7903a98aa11f5ffbf2ac355",
       "src": "https://github.com/emrearmagan/atlas.nvim"
     },
     "blink.cmp": {
@@ -18,7 +18,7 @@
       "version": "'v1.10.2'"
     },
     "canola.nvim": {
-      "rev": "b5f19d41b294e84e9fd2a81460cfc02fed8321ed",
+      "rev": "d666c3b9eae1704bbaae2de45e8013bf6308488a",
       "src": "https://forge.barrettruth.com/barrettruth/canola.nvim"
     },
     "codediff.nvim": {
@@ -37,9 +37,9 @@
       "rev": "27517eb7505482398f31465f2afdfc8bba0d423c",
       "src": "https://github.com/wurli/contextindent.nvim"
     },
-    "copilot.vim": {
-      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
-      "src": "https://github.com/github/copilot.vim"
+    "copilot.lua": {
+      "rev": "d1570ddc00fc4fc4caf7422803805ee22cca14ff",
+      "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "ctest-telescope.nvim": {
       "rev": "2b9012a19abf2c3a8bce64d201c6b9581093ad20",
@@ -50,7 +50,7 @@
       "src": "https://github.com/akinsho/git-conflict.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "d4854fa9a94b5c8b37dd209fb4a19e98e764186f",
+      "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "jai.vim": {
@@ -62,11 +62,11 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini.nvim": {
-      "rev": "d79805a0dfe9e8dc82c0988aec0d85e5440e86eb",
+      "rev": "a321b535c75ca88ba7fddfd8eb5b583fbda50dd6",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "832a2db084ac25c2801fd73a3fab58f3c82ed2ec",
+      "rev": "ba2f33b64b996ff5530c4c45a3c432fb63aaa95b",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "neotest": {
@@ -94,15 +94,15 @@
       "src": "https://github.com/mfussenegger/nvim-dap-python"
     },
     "nvim-dap-view": {
-      "rev": "b4486a6e83c45db4712849c09a76ef95b41a2133",
+      "rev": "8cfadf9e6784f0af5d5efa1e435e77d51ca14741",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-lint": {
-      "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
+      "rev": "52107ce2076a27a285af781248e2c59bad817cd0",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "77b7432d4770d23b277d37923e5a08a442d8bb07",
+      "rev": "d5c7e7bcc15bccc01bf1601a03473e10de2f0f7e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -170,7 +170,7 @@
       "src": "https://github.com/folke/trouble.nvim"
     },
     "unnest.nvim": {
-      "rev": "dbe0da4a593eeb432d770fbe7a2f4f2c078d9b10",
+      "rev": "e9e269134ad85eb45c4e1fa3654801be0d3641b7",
       "src": "https://github.com/brianhuster/unnest.nvim"
     },
     "vim-bitbake": {

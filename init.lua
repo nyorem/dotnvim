@@ -70,7 +70,7 @@ vim.pack.add({
   -- lightning fast completion
   { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
   -- your best AI coding assistant
-  "https://github.com/github/copilot.vim",
+  "https://github.com/zbirenbaum/copilot.lua",
   -- -<space>j to jump to any definition/declaration
   "https://github.com/pechorin/any-jump.vim",
 })
@@ -80,12 +80,21 @@ require("blink.cmp").setup({
   keymap = { preset = "super-tab" },
 })
 
--- copilot.vim
-vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
+-- copilot.lua
+require("copilot").setup({
+  filetypes = {
+    markdown = true,
+  },
+  suggestion = {
+    auto_trigger = true,
+    keymap = {
+      accept = "<C-j>",
+    },
+  },
 })
-vim.g.copilot_no_tab_map = true
+
+-- copilot-ai-commit
+require("copilot-ai-commit").setup()
 
 -- {{{2 debugging
 vim.pack.add({
@@ -690,6 +699,10 @@ vim.keymap.set('n', '<Leader>fn', function()
   Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "Search inside neovim configuration" })
 
+vim.keymap.set('n', '<Leader>fb', function()
+  vim.cmd.edit(vim.env.HOME .. "/.bash_aliases")
+end, { desc = "Open bash configuration" })
+
 vim.keymap.set('n', '<Leader>hh', function() Snacks.picker.help() end, { desc = "Search inside vim help" })
 
 vim.keymap.set('n', '<Leader>,', function() Snacks.picker.buffers() end, { desc = "List open buffers" })
@@ -865,7 +878,13 @@ require("snacks").setup({
       worktrees_new = {
         title = "New worktree",
         finder = "git_branches",
-        format = "git_branch",
+        format = function(item)
+          if item.detached then
+            return { { "(detached HEAD)", "SnacksPickerGitDetached" } }
+          end
+          local hl = item.current and "SnacksPickerGitBranchCurrent" or "SnacksPickerGitBranch"
+          return { { item.branch, hl } }
+        end,
         preview = "git_log",
         all = true,
         win = {
@@ -888,6 +907,12 @@ require("snacks").setup({
         confirm = function(picker, item)
           picker:close()
           local branch = item ~= nil and item.branch or picker.finder.filter.pattern
+          local remote, name = branch:match("^remotes/([^/]+)/(.+)$")
+          if remote then
+            -- create a local branch tracking the remote one (no-op if it already exists)
+            vim.system({ "git", "branch", "--track", name, remote .. "/" .. name }):wait()
+            branch = name
+          end
           require("worktrees").utils.create_worktree("", branch, true)
         end,
       },
@@ -999,8 +1024,6 @@ vim.pack.add({
   "https://github.com/unblevable/quick-scope",
 
   -- Markdown table manipulation:
-  -- Go to next cell = '<TAB>'
-  -- Go to previous cell = '<S-TAB>'
   -- Insert a row above the current row = '<M-k>'
   -- Insert a row below the current row = '<M-j>'
   -- Move the current row up = '<M-S-k>'
@@ -1026,7 +1049,10 @@ require("wildfire").setup()
 vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 
 -- table-nvim
-require("table-nvim").setup({})
+-- <Tab>/<S-Tab> disabled: they override blink.cmp's buffer-local mappings
+require("table-nvim").setup({
+  mappings = { next = false, prev = false },
+})
 
 -- yank-path
 require("yank-path").setup({
